@@ -1,0 +1,21 @@
+{
+  "name": "mobile",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 8081",
+    "build": "vite build",
+    "preview": "vite --host 127.0.0.1 --port 8081"
+  },
+  "dependencies": {
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.87.1",
+    "react-native-web": "0.21.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.0"
+  }
+}

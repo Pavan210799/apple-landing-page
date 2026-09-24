@@ -1,0 +1,272 @@
+.scroll-rise {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-rise.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-action {
+  cursor: pointer;
+}
+
+.page-action-nav,
+.page-action-chapter,
+.page-action-text,
+.page-action-footer {
+  transition: background-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+.apple-04 button:not([class*="pseudo"]) {
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.apple-04 button[class*="buy-"]:hover,
+.apple-04 button[class*="buy-"]:focus-visible {
+  background-color: rgb(0, 119, 237);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 113, 227, 0.28);
+}
+
+.apple-04 button:not([class*="buy-"]):not([class*="pseudo"]):hover,
+.apple-04 button:not([class*="buy-"]):not([class*="pseudo"]):focus-visible {
+  background-color: rgb(232, 232, 237);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.apple-04 button:not([class*="pseudo"]):active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
+.page-action-nav:hover,
+.page-action-nav:focus-visible {
+  opacity: 0.65;
+}
+
+.page-action-chapter:hover,
+.page-action-chapter:focus-visible {
+  opacity: 0.72;
+}
+
+.page-action-text:hover,
+.page-action-text:hover span,
+.page-action-text:focus-visible,
+.page-action-text:focus-visible span {
+  color: rgb(0, 64, 220);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page-action-footer:hover,
+.page-action-footer:focus-visible {
+  color: rgb(29, 29, 31);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-ac-globalfooter-link.page-action-footer:hover,
+.footer-ac-globalfooter-link.page-action-footer:focus-visible {
+  color: rgb(0, 64, 220);
+}
+
+.page-action:focus-visible {
+  outline: 2px solid rgb(0, 113, 227);
+  outline-offset: 3px;
+}
+
+.apple-04 button[class*="pseudo"] {
+  pointer-events: none;
+}
+
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 44px 22px 24px;
+  background: rgba(29, 29, 31, 0.4);
+  animation: page-overlay-in 180ms ease;
+}
+
+.page-sheet {
+  width: min(540px, 100%);
+  max-height: calc(100vh - 88px);
+  overflow: auto;
+  padding: 22px 28px 26px;
+  border-radius: 0;
+  background: rgb(251, 251, 253);
+  color: rgb(29, 29, 31);
+  box-shadow: 0 11px 34px rgba(0, 0, 0, 0.16);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: -0.224px;
+  animation: page-sheet-in 220ms ease;
+}
+
+.page-sheet-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgb(210, 210, 215);
+}
+
+.page-sheet h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.374px;
+  color: rgb(29, 29, 31);
+}
+
+.page-sheet p {
+  margin: 0 0 16px;
+  color: rgb(110, 110, 115);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+}
+
+.page-sheet input {
+  width: 100%;
+  height: 44px;
+  margin-bottom: 8px;
+  padding: 0 14px;
+  border: 1px solid rgb(210, 210, 215);
+  border-radius: 8px;
+  background: rgb(255, 255, 255);
+  color: rgb(29, 29, 31);
+  font-family: inherit;
+  font-size: 17px;
+  letter-spacing: -0.374px;
+  outline: none;
+}
+
+.page-sheet input:focus {
+  border-color: rgb(0, 113, 227);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
+}
+
+.page-sheet ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-sheet li + li {
+  margin-top: 2px;
+}
+
+.page-sheet button,
+.page-sheet a {
+  font-family: inherit;
+}
+
+.page-sheet-link,
+.page-sheet-jump {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: rgb(0, 102, 204);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.24;
+  letter-spacing: -0.374px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.page-sheet-link:hover,
+.page-sheet-jump:hover,
+.page-sheet-link:focus-visible,
+.page-sheet-jump:focus-visible {
+  background: rgb(245, 245, 247);
+  color: rgb(0, 64, 220);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page-sheet-primary,
+.page-sheet-close {
+  height: 36px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 980px;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.374px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.page-sheet-primary {
+  display: inline-flex;
+  align-items: center;
+  background: rgb(0, 113, 227);
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.page-sheet-primary:hover {
+  background: rgb(0, 119, 237);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 113, 227, 0.28);
+}
+
+.page-sheet-close {
+  background: rgb(255, 255, 255);
+  color: rgb(0, 102, 204);
+}
+
+.page-sheet-close:hover {
+  background: rgb(245, 245, 247);
+  color: rgb(0, 64, 220);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@keyframes page-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes page-sheet-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-action-nav,
+  .page-action-chapter,
+  .page-action-text,
+  .page-action-footer,
+  .apple-04 button:not([class*="pseudo"]),
+  .page-sheet-link,
+  .page-sheet-jump,
+  .page-sheet-primary,
+  .page-sheet-close,
+  .page-overlay,
+  .page-sheet,
+  .scroll-rise {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

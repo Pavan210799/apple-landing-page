@@ -1,0 +1,266 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-y: auto;
+  background: rgb(242, 242, 242);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
+  background: rgb(242, 242, 242);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+img {
+  max-width: none;
+  display: block;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.apple-04-fit {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  overflow: clip;
+  height: calc(18663.27px * min(1, 100vw / 1440px));
+}
+
+.apple-04 {
+  position: relative;
+  width: 1440px;
+  height: 18663.27px;
+  overflow: clip;
+  background: rgb(242, 242, 242);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgb(29, 29, 31);
+  transform-origin: top left;
+  transform: scale(min(1, 100vw / 1440px));
+}
+
+.apple-04__globalnav {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  width: 1440px;
+  height: 44px;
+  background: rgba(242, 242, 242, 0.92);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Desktop sticky top bar sits above page content while scrolling */
+html:not(.website-compact) .apple-04__globalnav {
+  z-index: 60;
+}
+
+.apple-04__chapternav {
+  position: absolute;
+  left: 0;
+  top: 44px;
+  z-index: 20;
+  width: 1440px;
+  height: 116px;
+  overflow: hidden;
+}
+
+.apple-04__main {
+  position: absolute;
+  left: 0;
+  top: 160px;
+  width: 1440px;
+}
+
+.apple-04__footer {
+  position: absolute;
+  left: 0;
+  top: 15688.14px;
+  width: 1440px;
+}
+
+.ul-globalnav-list-svg-3,
+.ul-globalnav-list-svg-47,
+.ul-globalnav-list-svg-48 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.ul-globalnav-list-svg-3 {
+  padding-top: 12.3px;
+}
+
+.ul-globalnav-list-svg-3 svg {
+  width: 13px;
+  height: 16px;
+}
+
+.ul-globalnav-list-svg-47 {
+  padding-top: 14.5px;
+}
+
+.ul-globalnav-list-svg-47 svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ul-globalnav-list-svg-48 {
+  padding-top: 13.1px;
+}
+
+.ul-globalnav-list-svg-48 svg {
+  width: 13px;
+  height: 15px;
+}
+
+.ul-globalnav-list-svg-3 svg,
+.ul-globalnav-list-svg-47 svg,
+.ul-globalnav-list-svg-48 svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.ul-globalnav-list-span-4 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.ul-globalnav-list-store-7,
+.ul-globalnav-list-mac-11,
+.ul-globalnav-list-ipad-15,
+.ul-globalnav-list-iphone-19,
+.ul-globalnav-list-watch-23,
+.ul-globalnav-list-airpods-27,
+.ul-globalnav-list-tv-and-home-31,
+.ul-globalnav-list-entertainment-35,
+.ul-globalnav-list-accessories-39,
+.ul-globalnav-list-support-43 {
+  position: relative;
+  align-items: center;
+}
+
+.ul-globalnav-list-store-7 > [aria-hidden],
+.ul-globalnav-list-mac-11 > [aria-hidden],
+.ul-globalnav-list-ipad-15 > [aria-hidden],
+.ul-globalnav-list-iphone-19 > [aria-hidden],
+.ul-globalnav-list-watch-23 > [aria-hidden],
+.ul-globalnav-list-airpods-27 > [aria-hidden],
+.ul-globalnav-list-tv-and-home-31 > [aria-hidden],
+.ul-globalnav-list-entertainment-35 > [aria-hidden],
+.ul-globalnav-list-accessories-39 > [aria-hidden],
+.ul-globalnav-list-support-43 > [aria-hidden] {
+  visibility: hidden;
+}
+
+.ul-globalnav-list-store-7 > div,
+.ul-globalnav-list-mac-11 > div,
+.ul-globalnav-list-ipad-15 > div,
+.ul-globalnav-list-iphone-19 > div,
+.ul-globalnav-list-watch-23 > div,
+.ul-globalnav-list-airpods-27 > div,
+.ul-globalnav-list-tv-and-home-31 > div,
+.ul-globalnav-list-entertainment-35 > div,
+.ul-globalnav-list-accessories-39 > div,
+.ul-globalnav-list-support-43 > div {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+
+.ul-globalnav-list-store-7 > div > span,
+.ul-globalnav-list-mac-11 > div > span,
+.ul-globalnav-list-ipad-15 > div > span,
+.ul-globalnav-list-iphone-19 > div > span,
+.ul-globalnav-list-watch-23 > div > span,
+.ul-globalnav-list-airpods-27 > div > span,
+.ul-globalnav-list-tv-and-home-31 > div > span,
+.ul-globalnav-list-entertainment-35 > div > span,
+.ul-globalnav-list-accessories-39 > div > span,
+.ul-globalnav-list-support-43 > div > span {
+  position: static;
+  left: auto;
+  top: auto;
+  width: auto;
+  height: auto;
+}
+
+.nav-chapternav-figure-4,
+.nav-chapternav-figure-8,
+.nav-chapternav-figure-12,
+.nav-chapternav-figure-15,
+.nav-chapternav-figure-18,
+.nav-chapternav-figure-21,
+.nav-chapternav-figure-24,
+.nav-chapternav-figure-27,
+.nav-chapternav-figure-30,
+.nav-chapternav-figure-33,
+.nav-chapternav-figure-36,
+.nav-chapternav-figure-39 {
+  display: block;
+  overflow: visible;
+  color: rgb(29, 29, 31);
+}
+
+.nav-chapternav-figure-4 img,
+.nav-chapternav-figure-8 img,
+.nav-chapternav-figure-12 img,
+.nav-chapternav-figure-15 img,
+.nav-chapternav-figure-18 img,
+.nav-chapternav-figure-21 img,
+.nav-chapternav-figure-24 img,
+.nav-chapternav-figure-27 img,
+.nav-chapternav-figure-30 img,
+.nav-chapternav-figure-33 img,
+.nav-chapternav-figure-36 img,
+.nav-chapternav-figure-39 img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.apple-04 span[class*="learn-more"]:not([class*="footer-ac-globalfooter"]),
+.apple-04 span[class*="find-your-deal"]:not([class*="footer-ac-globalfooter"]),
+.apple-04 span[class*="shop-magsafe"]:not([class*="footer-ac-globalfooter"]),
+.apple-04 span[class*="shop-all-iphone"]:not([class*="footer-ac-globalfooter"]),
+.apple-04 span[class*="compare-all-iphone"]:not([class*="footer-ac-globalfooter"]),
+.apple-04 span[class*="shop-iphone-489"]:not([class*="footer-ac-globalfooter"]),
+.apple-04 span[class*="buy-121"]:not([class*="footer-ac-globalfooter"]),
+.apple-04 span[class*="buy-252"]:not([class*="footer-ac-globalfooter"]) {
+  white-space: nowrap !important;
+}

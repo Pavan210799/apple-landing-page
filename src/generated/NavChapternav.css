@@ -1,0 +1,501 @@
+/* Generated from figma-node.json + src/assets — no Figma API request */
+
+.nav-chapternav {
+  box-sizing: border-box;
+}
+
+.nav-chapternav-nav-chapternav-1 {
+  position: relative;
+  box-sizing: border-box;
+  width: 1440px;
+  height: 116px;
+  background: rgb(251, 251, 253);
+}
+
+.nav-chapternav-ul-2 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 34px;
+  top: 8px;
+  width: 1372px;
+  height: 129px;
+}
+
+.nav-chapternav-a-3 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 135.67px;
+  top: 3px;
+  width: 76.19px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-4 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 18.09px;
+  top: 0px;
+  width: 40px;
+  height: 54px;
+}
+
+.nav-chapternav-iphone-14-pro-5 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 1px;
+  top: 61px;
+  width: 75px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-new-6 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 27.77px;
+  top: 77px;
+  width: 21px;
+  height: 12px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: -0.08px;
+  text-align: center;
+  color: rgb(191, 72, 0);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-7 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 252.28px;
+  top: 3px;
+  width: 54.19px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-8 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 8.09px;
+  top: 0px;
+  width: 38px;
+  height: 54px;
+}
+
+.nav-chapternav-iphone-14-9 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 1px;
+  top: 61px;
+  width: 53px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-new-10 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 16.77px;
+  top: 77px;
+  width: 21px;
+  height: 12px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: -0.08px;
+  text-align: center;
+  color: rgb(191, 72, 0);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-11 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 346.89px;
+  top: 3px;
+  width: 53.98px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-12 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 8.98px;
+  top: 0px;
+  width: 36px;
+  height: 54px;
+}
+
+.nav-chapternav-iphone-13-13 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 1px;
+  top: 61px;
+  width: 53px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-14 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  padding-right: 0.6875px;
+  position: absolute;
+  left: 441.3px;
+  top: 3px;
+  width: 55.69px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-15 {
+  box-sizing: border-box;
+  width: 19px;
+  height: 54px;
+}
+
+.nav-chapternav-iphone-se-16 {
+  box-sizing: border-box;
+  width: 55px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-17 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  padding-right: 0.703125px;
+  position: absolute;
+  left: 537.41px;
+  top: 3px;
+  width: 53.7px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-18 {
+  box-sizing: border-box;
+  width: 22px;
+  height: 54px;
+}
+
+.nav-chapternav-iphone-12-19 {
+  box-sizing: border-box;
+  width: 53px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-20 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  padding-right: 0.484375px;
+  padding-left: 1px;
+  position: absolute;
+  left: 631.53px;
+  top: 3px;
+  width: 50.48px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-21 {
+  box-sizing: border-box;
+  width: 45px;
+  height: 54px;
+}
+
+.nav-chapternav-compare-22 {
+  box-sizing: border-box;
+  width: 49px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-23 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 722.44px;
+  top: 3px;
+  width: 42.98px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-24 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 1.98px;
+  top: 0px;
+  width: 39px;
+  height: 54px;
+}
+
+.nav-chapternav-airpods-25 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0px;
+  top: 61px;
+  width: 42px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-26 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  padding-right: 0.578125px;
+  padding-left: 1px;
+  position: absolute;
+  left: 805.84px;
+  top: 3px;
+  width: 34.58px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-27 {
+  box-sizing: border-box;
+  width: 30px;
+  height: 54px;
+}
+
+.nav-chapternav-airtag-28 {
+  box-sizing: border-box;
+  width: 33px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-29 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 880.84px;
+  top: 3px;
+  width: 66.92px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-30 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 13.45px;
+  top: 0px;
+  width: 40px;
+  height: 54px;
+}
+
+.nav-chapternav-accessories-31 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 1px;
+  top: 61px;
+  width: 64px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-32 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 988.19px;
+  top: 3px;
+  width: 61.78px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-33 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 12.89px;
+  top: 0px;
+  width: 36px;
+  height: 54px;
+}
+
+.nav-chapternav-apple-card-34 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0px;
+  top: 61px;
+  width: 60px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-35 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 1090.39px;
+  top: 3px;
+  width: 35.73px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-36 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 1.86px;
+  top: 0px;
+  width: 32px;
+  height: 54px;
+}
+
+.nav-chapternav-ios-16-37 {
+  box-sizing: border-box;
+  position: absolute;
+  left: -1px;
+  top: 61px;
+  width: 36px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}
+
+.nav-chapternav-a-38 {
+  position: relative;
+  box-sizing: border-box;
+  position: absolute;
+  left: 1166.55px;
+  top: 3px;
+  width: 69.78px;
+  height: 77px;
+}
+
+.nav-chapternav-figure-39 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 5.89px;
+  top: 0px;
+  width: 58px;
+  height: 54px;
+}
+
+.nav-chapternav-shop-iphone-40 {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0px;
+  top: 61px;
+  width: 68px;
+  height: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+  text-align: center;
+  color: rgb(29, 29, 31);
+  white-space: nowrap;
+}

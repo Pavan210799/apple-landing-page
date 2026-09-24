@@ -1,0 +1,830 @@
+/* Website version only — tablet & phone widths.
+   Scope: globalnav + chapternav only. Main page layout/fonts stay as desktop. */
+
+/* Mobile compare accordion — hidden on tablet/desktop */
+.mobile-compare {
+  display: none;
+}
+
+html.website-compact,
+html.website-compact body {
+  overflow-x: clip;
+}
+
+.website-globalnav-toggle {
+  display: none;
+}
+
+html.website-compact .website-globalnav-toggle {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: 5;
+  flex: 0 0 44px;
+}
+
+.website-globalnav-toggle span {
+  display: block;
+  width: 17px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+html.website-compact .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+html.website-compact .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+html.website-compact .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+html.website-compact .apple-04__globalnav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0 10px 0 4px;
+  overflow: visible;
+  z-index: 40;
+  border-bottom: 1px solid rgb(210, 210, 215);
+}
+
+html.website-compact .ul-globalnav-list-ul-globalnav-list-1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  height: 44px;
+  padding: 0 4px;
+  overflow: visible;
+}
+
+html.website-compact .ul-globalnav-list-apple-2 {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: auto;
+  height: 44px;
+  padding: 0 8px;
+}
+
+html.website-compact .ul-globalnav-list-apple-5 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+html.website-compact .ul-globalnav-list-div-6 {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  position: absolute;
+  top: 44px;
+  left: -48px;
+  right: auto;
+  width: 1440px !important;
+  height: auto !important;
+  min-height: 0;
+  margin: 0;
+  padding: 4px 24px 20px 68px;
+  box-sizing: border-box;
+  background: rgb(242, 242, 242);
+  border-bottom: 1px solid rgb(210, 210, 215);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 45;
+}
+
+html.website-compact .apple-04-fit.is-globalnav-open .ul-globalnav-list-div-6 {
+  display: flex;
+}
+
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-store"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-mac"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-ipad"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-iphone"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-watch"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-airpods"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-tv"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-entertainment"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-accessories"],
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-support"] {
+  position: static !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0;
+  padding: 11px 0 !important;
+  box-sizing: border-box;
+}
+
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-"] > [aria-hidden="true"] {
+  display: none !important;
+}
+
+html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-"] > div {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+html.website-compact .ul-globalnav-list-div-6 [class*="ul-globalnav-list-span-"] {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible;
+}
+
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-store"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-mac"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-ipad"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-iphone"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-watch"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-airpods"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-tv"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-entertainment"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-accessories"],
+html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-support"] {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  width: auto !important;
+  height: auto !important;
+  font-size: 17px !important;
+  line-height: 22px !important;
+  letter-spacing: -0.02em;
+  color: rgba(0, 0, 0, 0.88);
+  white-space: nowrap;
+}
+
+html.website-compact .ul-globalnav-list-svg-47,
+html.website-compact .ul-globalnav-list-svg-48 {
+  position: static;
+  flex: 0 0 auto;
+  margin-left: 8px;
+}
+
+html.website-compact .ul-globalnav-list-ul-globalnav-list-1 > .ul-globalnav-list-svg-47 {
+  margin-left: auto;
+}
+
+/* Chapter nav: scroll horizontally; hug content so banner sits flush */
+html.website-compact .apple-04__chapternav {
+  width: 1440px;
+  height: 104px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  background: rgb(251, 251, 253);
+  border-bottom: 1px solid rgb(210, 210, 215);
+}
+
+html.website-compact .nav-chapternav-nav-chapternav-1 {
+  width: max-content;
+  min-width: 100%;
+  height: 104px;
+  background: rgb(251, 251, 253);
+}
+
+html.website-compact .nav-chapternav-ul-2 {
+  position: relative !important;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 6px;
+  left: 0 !important;
+  top: 0 !important;
+  width: max-content;
+  height: 104px;
+  padding: 4px 16px 0;
+  box-sizing: border-box;
+}
+
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-a-"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-figure-"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-iphone"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-new"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-compare"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-airpods"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-airtag"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-accessories"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-apple-card"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-ios"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-shop"] {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  right: auto !important;
+}
+
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-a-"] {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 118px;
+  min-width: 118px;
+  height: 96px;
+  cursor: pointer;
+}
+
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-figure-"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 54px;
+  margin-bottom: 2px;
+  flex-shrink: 0;
+}
+
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-figure-"] img {
+  width: 40px !important;
+  height: auto !important;
+  max-height: 54px;
+  object-fit: contain;
+}
+
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-iphone"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-compare"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-airpods"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-airtag"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-accessories"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-apple-card"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-ios"],
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-shop"] {
+  width: auto;
+  max-width: 118px;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  white-space: nowrap;
+  text-align: center;
+}
+
+html.website-compact .apple-04__chapternav [class*="nav-chapternav-new-"] {
+  margin-top: 1px;
+  font-size: 10px !important;
+  line-height: 12px !important;
+}
+
+/* Main follows shorter chapter strip (44 + 104) — no gap under chapter nav */
+html.website-compact .apple-04__main {
+  top: 148px;
+}
+
+/* —— Mobile (≤767): fill screen + larger navbars —— */
+@media (max-width: 767px) {
+  html.website-mobile,
+  html.website-mobile body,
+  html.website-mobile #root {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: clip;
+  }
+
+  html.website-mobile .apple-04-fit {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  /* —— Global nav: taller bar, bigger hamburger / logo / icons —— */
+  html.website-mobile .apple-04__globalnav {
+    height: 140px;
+    padding: 0 24px 0 12px;
+  }
+
+  html.website-mobile .website-globalnav-toggle {
+    width: 100px;
+    height: 140px;
+    flex: 0 0 100px;
+    gap: 12px;
+  }
+
+  html.website-mobile .website-globalnav-toggle span {
+    width: 40px;
+    height: 3.5px;
+  }
+
+  html.website-mobile .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(1) {
+    transform: translateY(15.5px) rotate(45deg);
+  }
+
+  html.website-mobile .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(3) {
+    transform: translateY(-15.5px) rotate(-45deg);
+  }
+
+  html.website-mobile .ul-globalnav-list-ul-globalnav-list-1 {
+    height: 140px;
+  }
+
+  html.website-mobile .ul-globalnav-list-apple-2 {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  html.website-mobile .ul-globalnav-list-svg-3 {
+    padding-top: 0 !important;
+    width: 42px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  html.website-mobile .ul-globalnav-list-svg-3 svg {
+    width: 38px !important;
+    height: 46px !important;
+  }
+
+  html.website-mobile .ul-globalnav-list-svg-47,
+  html.website-mobile .ul-globalnav-list-svg-48 {
+    width: 72px;
+    height: 140px;
+    padding-top: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+  }
+
+  html.website-mobile .ul-globalnav-list-svg-47 svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  html.website-mobile .ul-globalnav-list-svg-48 svg {
+    width: 38px !important;
+    height: 44px !important;
+  }
+
+  html.website-mobile .ul-globalnav-list-div-6 {
+    top: 140px;
+    left: 0;
+    width: 1440px !important;
+    padding: 20px 56px 36px;
+  }
+
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-store"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-mac"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-ipad"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-iphone"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-watch"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-airpods"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-tv"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-entertainment"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-accessories"],
+  html.website-mobile .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-support"] {
+    padding: 20px 0 !important;
+  }
+
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-store"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-mac"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-ipad"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-iphone"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-watch"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-airpods"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-tv"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-entertainment"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-accessories"],
+  html.website-mobile .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-support"] {
+    font-size: 36px !important;
+    line-height: 44px !important;
+  }
+
+  /* —— Chapter nav: 60% of original enlarged mobile size —— */
+  html.website-mobile .apple-04__chapternav {
+    top: 140px;
+    height: 156px;
+  }
+
+  html.website-mobile .nav-chapternav-nav-chapternav-1,
+  html.website-mobile .nav-chapternav-ul-2 {
+    height: 156px;
+  }
+
+  html.website-mobile .nav-chapternav-ul-2 {
+    padding: 11px 17px 8px;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-a-"] {
+    width: 204px;
+    min-width: 204px;
+    height: auto;
+    min-height: 132px;
+    gap: 0;
+  }
+
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-figure-"] {
+    width: 72px;
+    height: 78px;
+    margin-bottom: 6px;
+  }
+
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-figure-"] img {
+    width: 66px !important;
+    max-height: 78px;
+  }
+
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-iphone"],
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-compare"],
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-airpods"],
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-airtag"],
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-accessories"],
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-apple-card"],
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-ios"],
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-shop"] {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    display: block;
+    width: 100%;
+    max-width: 204px;
+    height: auto !important;
+    font-size: 29px !important;
+    line-height: 31px !important;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  html.website-mobile .apple-04__chapternav [class*="nav-chapternav-new-"] {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    font-size: 17px !important;
+    line-height: 19px !important;
+    margin-top: 4px;
+  }
+
+  /* 140 global + 156 chapter (60%) */
+  html.website-mobile .apple-04__main {
+    top: 296px;
+  }
+
+  /* Promo strip: flex so footnote + link don’t collide */
+  html.website-mobile .main-main-div-543 {
+    height: auto !important;
+    min-height: 48px;
+    overflow: visible !important;
+  }
+
+  html.website-mobile .main-main-div-544 {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1440px !important;
+    height: auto !important;
+    min-height: 48px;
+    padding: 12px 48px;
+    box-sizing: border-box;
+  }
+
+  html.website-mobile .main-main-p-545 {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px 6px;
+    width: auto !important;
+    max-width: 1200px;
+    height: auto !important;
+  }
+
+  html.website-mobile .main-main-span-546,
+  html.website-mobile .main-main-a-549 {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    display: inline !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+  }
+
+  html.website-mobile .main-main-get-200-600-in-credit-toward-iphone-14-or-iphone-14-pro-when-you-trade-in-iphone-11-or-higher-547,
+  html.website-mobile .main-main-shop-iphone-550,
+  html.website-mobile .main-main-node-551 {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    font-size: 18px !important;
+    line-height: 24px !important;
+    white-space: normal;
+  }
+
+  html.website-mobile .main-main-1-548 {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    display: inline;
+    width: auto !important;
+    height: auto !important;
+    font-size: 12px !important;
+    line-height: 24px !important;
+    vertical-align: super;
+  }
+
+  /* Hero pricing — larger type; push CTA rows down so they don’t collide */
+  html.website-mobile .main-main-from-799-or-33-29-mo-for-24-mo-before-trade-in2-11,
+  html.website-mobile .main-main-from-999-or-41-62-mo-for-24-mo-before-trade-in2-25,
+  html.website-mobile .main-main-from-429-or-17-87-mo-for-24-mo-before-trade-in2-39 {
+    font-size: 30px !important;
+    line-height: 36px !important;
+    height: auto !important;
+  }
+
+  html.website-mobile .main-main-p-10,
+  html.website-mobile .main-main-p-24,
+  html.website-mobile .main-main-p-38 {
+    height: 40px !important;
+  }
+
+  html.website-mobile .main-main-ul-12 {
+    top: 278px !important;
+  }
+
+  html.website-mobile .main-main-ul-26 {
+    top: 196px !important;
+  }
+
+  html.website-mobile .main-main-ul-40 {
+    top: 256px !important;
+  }
+
+  html.website-mobile .main-main-buy-iphone-14-13,
+  html.website-mobile .main-main-buy-iphone-14-pro-27,
+  html.website-mobile .main-main-buy-iphone-se-41 {
+    width: auto !important;
+    min-width: 72px;
+    height: 42px !important;
+    padding: 10px 20px !important;
+    align-items: center;
+  }
+
+  html.website-mobile .main-main-buy-14,
+  html.website-mobile .main-main-buy-28,
+  html.website-mobile .main-main-buy-42 {
+    font-size: 20px !important;
+    line-height: 22px !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  html.website-mobile .main-main-learn-more-16,
+  html.website-mobile .main-main-learn-more-30,
+  html.website-mobile .main-main-learn-more-44 {
+    font-size: 26px !important;
+    line-height: 34px !important;
+    height: auto !important;
+  }
+
+  /* —— Compare: hide 4-col grid; show readable accordion cards —— */
+  html.website-mobile .main-main-section-318 {
+    overflow: visible !important;
+  }
+
+  html.website-mobile .main-main-div-321 {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  html.website-mobile .mobile-compare {
+    display: block;
+    position: absolute;
+    top: 64px;
+    left: 48px;
+    width: 1344px;
+    z-index: 5;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(29, 29, 31);
+    padding-bottom: 24px;
+  }
+
+  html.website-mobile .mobile-compare__title {
+    margin: 0 0 40px;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  html.website-mobile .mobile-compare__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  html.website-mobile .mobile-compare__card {
+    background: rgb(245, 245, 247);
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  html.website-mobile .mobile-compare__header {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    padding: 32px 36px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  html.website-mobile .mobile-compare__phone {
+    width: 140px;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  html.website-mobile .mobile-compare__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  html.website-mobile .mobile-compare__new {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: rgb(191, 97, 39);
+  }
+
+  html.website-mobile .mobile-compare__name {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  html.website-mobile .mobile-compare__tagline {
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: rgb(110, 110, 115);
+  }
+
+  html.website-mobile .mobile-compare__price {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  html.website-mobile .mobile-compare__chevron {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-right: 4px solid rgb(29, 29, 31);
+    border-bottom: 4px solid rgb(29, 29, 31);
+    transform: rotate(45deg) translateY(-4px);
+    transition: transform 0.2s ease;
+    opacity: 0.55;
+  }
+
+  html.website-mobile .mobile-compare__card.is-open .mobile-compare__chevron {
+    transform: rotate(225deg) translateY(-4px);
+  }
+
+  html.website-mobile .mobile-compare__details {
+    padding: 0 36px 40px;
+    border-top: 1px solid rgb(210, 210, 215);
+  }
+
+  html.website-mobile .mobile-compare__colors {
+    display: block;
+    width: 160px;
+    height: auto;
+    margin: 28px auto 24px;
+  }
+
+  html.website-mobile .mobile-compare__specs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  html.website-mobile .mobile-compare__specs li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  html.website-mobile .mobile-compare__specs strong {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: rgb(110, 110, 115);
+  }
+
+  html.website-mobile .mobile-compare__specs span {
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+
+  html.website-mobile .mobile-compare__actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-top: 36px;
+  }
+
+  html.website-mobile .mobile-compare__buy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    height: 64px;
+    padding: 0 36px;
+    border-radius: 980px;
+    background: rgb(0, 113, 227);
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  html.website-mobile .mobile-compare__learn {
+    font-size: 36px;
+    font-weight: 400;
+    color: rgb(0, 113, 227);
+    text-decoration: none;
+  }
+
+  html.website-mobile .mobile-compare__learn::after {
+    content: " ›";
+  }
+
+  html.website-mobile .mobile-compare__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  html.website-mobile .mobile-compare__links a {
+    font-size: 40px;
+    font-weight: 400;
+    color: rgb(0, 113, 227);
+    text-decoration: none;
+  }
+
+  html.website-mobile .mobile-compare__links a::after {
+    content: " ›";
+  }
+}
+
