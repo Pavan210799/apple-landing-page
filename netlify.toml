@@ -1,3 +1,12 @@
 [build]
-  command = "npm run build"
+  command = "npm install --prefix mobile && npm run build"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# App version lives under /mobile/
+[[redirects]]
+  from = "/mobile/*"
+  to = "/mobile/index.html"
+  status = 200
