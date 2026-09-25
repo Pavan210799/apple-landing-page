@@ -291,15 +291,72 @@ function App() {
 
   useEffect(() => {
     if (!panel) return undefined;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const html = document.documentElement;
+    const body = document.body;
+    const scrollY = window.scrollY;
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      htmlOverscroll: html.style.overscrollBehavior,
+      bodyOverflow: body.style.overflow,
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyLeft: body.style.left,
+      bodyRight: body.style.right,
+      bodyWidth: body.style.width,
+    };
+
+    /* Lock background scroll (html is the scroller; fixed body stops iOS chain). */
+    html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+
     const onKeyDown = (event) => {
       if (event.key === "Escape") setPanel(null);
     };
+    const onTouchMove = (event) => {
+      const scrollEl = event.target?.closest?.(".page-sheet-scroll");
+      if (!scrollEl) {
+        event.preventDefault();
+        return;
+      }
+      const { scrollTop, scrollHeight, clientHeight } = scrollEl;
+      const atTop = scrollTop <= 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+      const touch = event.touches[0];
+      const lastY = Number(scrollEl.dataset.touchY || touch.clientY);
+      const deltaY = touch.clientY - lastY;
+      scrollEl.dataset.touchY = String(touch.clientY);
+      if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
+        event.preventDefault();
+      }
+    };
+    const onTouchStart = (event) => {
+      const scrollEl = event.target?.closest?.(".page-sheet-scroll");
+      if (scrollEl && event.touches[0]) {
+        scrollEl.dataset.touchY = String(event.touches[0].clientY);
+      }
+    };
     window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("touchstart", onTouchStart, { passive: true });
+    document.addEventListener("touchmove", onTouchMove, { passive: false });
     return () => {
-      document.body.style.overflow = previous;
+      html.style.overflow = prev.htmlOverflow;
+      html.style.overscrollBehavior = prev.htmlOverscroll;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.position = prev.bodyPosition;
+      body.style.top = prev.bodyTop;
+      body.style.left = prev.bodyLeft;
+      body.style.right = prev.bodyRight;
+      body.style.width = prev.bodyWidth;
+      window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("touchstart", onTouchStart);
+      document.removeEventListener("touchmove", onTouchMove);
     };
   }, [panel]);
 
