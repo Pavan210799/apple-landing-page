@@ -17,8 +17,6 @@ const WEBSITE_COMPACT_MAX = 1024;
 const WEBSITE_MOBILE_MAX = 767;
 /** Accordion footer + legal modal: phone + tablet. Desktop keeps original footer. */
 const FOOTER_ACCORDION_MAX = WEBSITE_COMPACT_MAX;
-/** Tablet: mild zoom for readability. Phone uses exact fit-to-width. */
-const TABLET_SCALE_WIDTH = 1240;
 
 const riseSelectors = [
   ".main-main-div-3",
@@ -119,8 +117,8 @@ function App() {
       document.documentElement.classList.toggle("website-phone-footer", phoneFooter);
       setIsPhoneFooter(phoneFooter);
       if (!compact) setGlobalNavOpen(false);
-      const scaleWidth = !mobile && compact ? TABLET_SCALE_WIDTH : PAGE_WIDTH;
-      const scale = Math.min(1, viewport / scaleWidth);
+      /* Always fit the 1440 canvas to the viewport — never overflow horizontally. */
+      const scale = Math.min(1, viewport / PAGE_WIDTH);
       scaleRef.current = scale;
       const compareDelta = mobile
         ? Number.parseFloat(document.documentElement.dataset.compareDelta || "0") || 0
@@ -161,16 +159,11 @@ function App() {
         page.style.height = `${PAGE_HEIGHT + compareDelta}px`;
         fit.style.height = `${(PAGE_HEIGHT + compareDelta) * scale}px`;
       }
-      /* Wide desktop (≥1440): center the Figma canvas. Narrower: fill viewport. */
-      if (scale >= 1) {
-        fit.style.width = `${PAGE_WIDTH}px`;
-        fit.style.maxWidth = `${PAGE_WIDTH}px`;
-        fit.style.margin = "0 auto";
-      } else {
-        fit.style.width = "100%";
-        fit.style.maxWidth = "none";
-        fit.style.margin = "0";
-      }
+      /* Wide desktop (≥1440): center the Figma canvas. Narrower: fill viewport exactly. */
+      const fitWidth = PAGE_WIDTH * scale;
+      fit.style.width = `${fitWidth}px`;
+      fit.style.maxWidth = `${fitWidth}px`;
+      fit.style.margin = fitWidth < viewport ? "0 auto" : "0";
 
       const nav = page.querySelector(".apple-04__globalnav");
       if (nav) {
