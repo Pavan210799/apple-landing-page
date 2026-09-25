@@ -50,6 +50,11 @@ img {
   height: calc(18663.27px * min(1, 100vw / 1440px));
 }
 
+.apple-04-fit.is-page-booting {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .apple-04 {
   position: relative;
   width: 1440px;

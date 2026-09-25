@@ -8,6 +8,7 @@ import colors14 from "./assets/images/iphone-14-available-in-blue-purple-yellow-
 import colors13 from "./assets/images/iphone-13-available-in-green-pink-blue-midnight--a842fc35.png";
 import colorsSe from "./assets/images/iphone-se-available-in-midnight-starlight-and-pr-21c3e934.png";
 import { pages, shop } from "./pageActions";
+import { syncWebsiteMobileFooter } from "./WebsiteMobileFooter";
 
 const COMPARE_DEFAULT_H = 2313.75;
 const COMPARE_TOP = 3540;
@@ -113,7 +114,7 @@ function clearCompareLayout() {
   const page = document.querySelector(".apple-04");
   const fit = document.querySelector(".apple-04-fit");
   const mainRoot = document.querySelector(".main-main-main-main-1");
-  const footer = document.querySelector(".apple-04__footer");
+  const footer = document.querySelector(".apple-04__footer--desktop");
 
   delete document.documentElement.dataset.compareDelta;
 
@@ -146,7 +147,7 @@ function syncCompareLayout(rootEl) {
   const page = document.querySelector(".apple-04");
   const fit = document.querySelector(".apple-04-fit");
   const mainRoot = document.querySelector(".main-main-main-main-1");
-  const footer = document.querySelector(".apple-04__footer");
+  const footer = document.querySelector(".apple-04__footer--desktop");
   if (!section || !page || !mainRoot || !rootEl) return;
 
   if (!document.documentElement.classList.contains("website-mobile")) {
@@ -184,13 +185,17 @@ function syncCompareLayout(rootEl) {
     });
 
     const mainH = `${MAIN_HEIGHT + delta}px`;
-    const pageH = `${PAGE_HEIGHT + delta}px`;
     const footerTop = `${FOOTER_TOP + delta}px`;
-    const fitH = `${(PAGE_HEIGHT + delta) * pageScale(page)}px`;
     if (mainRoot.style.height !== mainH) mainRoot.style.height = mainH;
-    if (page.style.height !== pageH) page.style.height = pageH;
     if (footer && footer.style.top !== footerTop) footer.style.top = footerTop;
-    if (fit && fit.style.height !== fitH) fit.style.height = fitH;
+    // Mobile accordion footer owns final page/fit height (sits below Research).
+    syncWebsiteMobileFooter();
+    if (!document.documentElement.dataset.mobileFooterDelta) {
+      const pageH = `${PAGE_HEIGHT + delta}px`;
+      const fitH = `${(PAGE_HEIGHT + delta) * pageScale(page)}px`;
+      if (page.style.height !== pageH) page.style.height = pageH;
+      if (fit && fit.style.height !== fitH) fit.style.height = fitH;
+    }
   } finally {
     syncingCompare = false;
   }

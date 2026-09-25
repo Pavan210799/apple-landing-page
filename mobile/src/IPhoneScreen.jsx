@@ -194,6 +194,68 @@ function SearchMark() {
   );
 }
 
+function Bone({ style, dark }) {
+  return (
+    <View
+      style={[styles.bone, dark ? styles.boneDark : styles.boneLight, style]}
+      // Web shimmer via CSS class (see mobile/index.html)
+      className={dark ? "rn-bone rn-bone--dark" : "rn-bone"}
+    />
+  );
+}
+
+function PageSkeleton() {
+  return (
+    <View style={styles.skeleton} accessibilityLabel="Loading page">
+      <View style={styles.skeletonNav}>
+        <Bone style={styles.boneSm} />
+        <Bone style={styles.boneLogo} />
+        <View style={styles.skeletonNavSide}>
+          <Bone style={styles.boneIcon} />
+          <Bone style={styles.boneIcon} />
+        </View>
+      </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.skeletonChapter}>
+        {Array.from({ length: 8 }, (_, i) => (
+          <View key={i} style={styles.skeletonChapterItem}>
+            <Bone style={styles.boneCircle} />
+            <Bone style={styles.boneLabel} />
+          </View>
+        ))}
+      </ScrollView>
+      <View style={styles.skeletonHero}>
+        <Bone style={styles.boneKicker} />
+        <Bone style={styles.boneTitle} />
+        <Bone style={[styles.boneTitle, styles.boneShort]} />
+        <Bone style={styles.bonePrice} />
+        <View style={styles.skeletonCta}>
+          <Bone style={styles.bonePill} />
+          <Bone style={styles.boneLink} />
+        </View>
+        <Bone style={styles.boneMedia} />
+      </View>
+      <View style={[styles.skeletonHero, styles.skeletonHeroDark]}>
+        <Bone dark style={styles.boneTitle} />
+        <Bone dark style={styles.bonePrice} />
+        <View style={styles.skeletonCta}>
+          <Bone style={styles.bonePill} />
+          <Bone dark style={styles.boneLink} />
+        </View>
+        <Bone dark style={styles.boneMedia} />
+      </View>
+      <View style={styles.skeletonCards}>
+        {Array.from({ length: 3 }, (_, i) => (
+          <View key={i} style={styles.skeletonCard}>
+            <Bone style={styles.boneCardTitle} />
+            <Bone style={styles.boneCardBody} />
+            <Bone style={styles.boneCardMedia} />
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
+
 function Pill({ label, onPress, light }) {
   const scale = useRef(new Animated.Value(1)).current;
   const settle = (to) => {
@@ -349,6 +411,59 @@ export default function IPhoneScreen() {
   const [panel, setPanel] = useState(null);
   const [query, setQuery] = useState("");
   const [footerOpen, setFooterOpen] = useState(null);
+  const [booting, setBooting] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    let finished = false;
+    const started = Date.now();
+    const minMs = 700;
+    const sources = [
+      photos.word14,
+      photos.hero14,
+      photos.wordPro,
+      photos.heroPro,
+      photos.wordSe,
+      photos.heroSe,
+      photos.tour,
+      photos.trade,
+      ...Object.values(icons).slice(0, 8),
+    ];
+
+    const finish = () => {
+      if (cancelled || finished) return;
+      finished = true;
+      const wait = Math.max(0, minMs - (Date.now() - started));
+      setTimeout(() => {
+        if (!cancelled) setBooting(false);
+      }, wait);
+    };
+
+    Promise.all(
+      sources.map(
+        (source) =>
+          new Promise((resolve) => {
+            try {
+              const resolved = Image.resolveAssetSource?.(source);
+              const uri = resolved?.uri ?? (typeof source === "string" ? source : source?.uri);
+              if (!uri || !Image.prefetch) {
+                resolve();
+                return;
+              }
+              Image.prefetch(uri).then(() => resolve()).catch(() => resolve());
+            } catch {
+              resolve();
+            }
+          }),
+      ),
+    ).then(finish);
+
+    const safety = setTimeout(finish, 4000);
+    return () => {
+      cancelled = true;
+      clearTimeout(safety);
+    };
+  }, []);
 
   function mark(id) {
     return (event) => {
@@ -378,6 +493,8 @@ export default function IPhoneScreen() {
 
   return (
     <SafeAreaView style={styles.screen}>
+      {booting ? <PageSkeleton /> : null}
+      <View style={[styles.appBody, booting && styles.appBodyHidden]}>
       <View style={styles.nav}>
         <Pressable accessibilityRole="button" accessibilityLabel="Menu" onPress={() => setMenuOpen(true)} hitSlop={8}>
           <Text style={styles.navIcon}>☰</Text>
@@ -821,6 +938,7 @@ export default function IPhoneScreen() {
           </View>
         </Rise>
       </ScrollView>
+      </View>
 
       {menuOpen && (
         <Sheet title="Menu" onClose={() => setMenuOpen(false)}>
@@ -891,6 +1009,63 @@ export default function IPhoneScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, width: "100%", minWidth: 0, overflow: "hidden", backgroundColor: "#f5f5f7" },
+  appBody: { flex: 1, width: "100%" },
+  appBodyHidden: { opacity: 0, pointerEvents: "none" },
+  skeleton: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 40,
+    backgroundColor: "#f5f5f7",
+    pointerEvents: "auto",
+  },
+  bone: { borderRadius: 8 },
+  boneLight: { backgroundColor: "#e8e8ed" },
+  boneDark: { backgroundColor: "#2a2a2c" },
+  boneSm: { width: 28, height: 14 },
+  boneLogo: { width: 18, height: 22, borderRadius: 4 },
+  boneIcon: { width: 18, height: 18, borderRadius: 4 },
+  boneCircle: { width: 36, height: 48, borderRadius: 8 },
+  boneLabel: { width: 52, height: 10 },
+  boneKicker: { width: 48, height: 14 },
+  boneTitle: { width: "78%", maxWidth: 320, height: 26, alignSelf: "center" },
+  boneShort: { width: "55%", maxWidth: 220 },
+  bonePrice: { width: "70%", maxWidth: 260, height: 14, alignSelf: "center", marginTop: 4 },
+  bonePill: { width: 72, height: 34, borderRadius: 980 },
+  boneLink: { width: 96, height: 16 },
+  boneMedia: { width: "88%", maxWidth: 360, height: 260, borderRadius: 16, alignSelf: "center", marginTop: 8 },
+  boneCardTitle: { width: "55%", height: 20 },
+  boneCardBody: { width: "80%", height: 14 },
+  boneCardMedia: { width: "100%", height: 120, borderRadius: 12, marginTop: 8 },
+  skeletonNav: {
+    height: 48,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "rgba(251,251,253,0.94)",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "#d2d2d7",
+  },
+  skeletonNavSide: { flexDirection: "row", gap: 14 },
+  skeletonChapter: { paddingHorizontal: 12, paddingVertical: 14, gap: 16, backgroundColor: "#fbfbfd" },
+  skeletonChapterItem: { alignItems: "center", gap: 8 },
+  skeletonHero: {
+    backgroundColor: "#fff",
+    paddingTop: 40,
+    paddingBottom: 28,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    gap: 12,
+  },
+  skeletonHeroDark: { backgroundColor: "#000" },
+  skeletonCta: { flexDirection: "row", alignItems: "center", gap: 16, marginVertical: 8 },
+  skeletonCards: { padding: 16, gap: 12 },
+  skeletonCard: {
+    backgroundColor: "#fff",
+    borderRadius: 18,
+    padding: 20,
+    gap: 12,
+    minHeight: 180,
+  },
   riseHost: { width: "100%", alignSelf: "stretch" },
   nav: {
     height: 48,

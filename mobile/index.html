@@ -17,6 +17,52 @@
         min-height: 100%;
         overflow: hidden;
       }
+      .boot-shell {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background: #f5f5f7;
+        padding-bottom: 24px;
+      }
+      .boot-shell span {
+        display: block;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #e8e8ed, #f4f4f6, #e8e8ed);
+        background-size: 200% 100%;
+        animation: boot-shine 1.2s linear infinite;
+      }
+      .boot-nav {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid #d2d2d7;
+        background: #fbfbfd;
+      }
+      .boot-nav span { width: 22px; height: 16px; }
+      .boot-hero {
+        background: #fff;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .boot-hero .t { width: 78%; height: 26px; }
+      .boot-hero .p { width: 60%; height: 14px; }
+      .boot-hero .m { width: 88%; height: 240px; border-radius: 16px; margin-top: 8px; }
+      @keyframes boot-shine { to { background-position: -200% 0; } }
+      .rn-bone {
+        background: linear-gradient(90deg, #e8e8ed, #f4f4f6, #e8e8ed) !important;
+        background-size: 200% 100% !important;
+        animation: boot-shine 1.2s linear infinite;
+      }
+      .rn-bone--dark {
+        background: linear-gradient(90deg, #2a2a2c, #3a3a3c, #2a2a2c) !important;
+        background-size: 200% 100% !important;
+      }
       input, textarea {
         outline: none !important;
         box-shadow: none !important;
@@ -30,7 +76,12 @@
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot-shell" aria-hidden="true">
+        <div class="boot-nav"><span></span><span></span><span></span></div>
+        <div class="boot-hero"><span class="t"></span><span class="p"></span><span class="m"></span></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -161,9 +161,16 @@ function App() {
         page.style.height = `${PAGE_HEIGHT + compareDelta}px`;
         fit.style.height = `${(PAGE_HEIGHT + compareDelta) * scale}px`;
       }
-      fit.style.width = "100%";
-      fit.style.maxWidth = "none";
-      fit.style.margin = "0";
+      /* Wide desktop (≥1440): center the Figma canvas. Narrower: fill viewport. */
+      if (scale >= 1) {
+        fit.style.width = `${PAGE_WIDTH}px`;
+        fit.style.maxWidth = `${PAGE_WIDTH}px`;
+        fit.style.margin = "0 auto";
+      } else {
+        fit.style.width = "100%";
+        fit.style.maxWidth = "none";
+        fit.style.margin = "0";
+      }
 
       const nav = page.querySelector(".apple-04__globalnav");
       if (nav) {
