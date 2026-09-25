@@ -21,9 +21,9 @@ html.website-compact .website-globalnav-toggle {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
+  gap: 12px;
+  width: 100px;
+  height: 140px;
   margin: 0;
   padding: 0;
   border: none;
@@ -34,20 +34,20 @@ html.website-compact .website-globalnav-toggle {
   left: auto;
   top: auto;
   z-index: 5;
-  flex: 0 0 44px;
+  flex: 0 0 100px;
 }
 
 .website-globalnav-toggle span {
   display: block;
-  width: 17px;
-  height: 1.5px;
+  width: 40px;
+  height: 3.5px;
   background: currentColor;
   border-radius: 1px;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 html.website-compact .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
+  transform: translateY(15.5px) rotate(45deg);
 }
 
 html.website-compact .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(2) {
@@ -55,7 +55,7 @@ html.website-compact .apple-04-fit.is-globalnav-open .website-globalnav-toggle s
 }
 
 html.website-compact .apple-04-fit.is-globalnav-open .website-globalnav-toggle span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
+  transform: translateY(-15.5px) rotate(-45deg);
 }
 
 html.website-compact .apple-04__globalnav {
@@ -63,7 +63,8 @@ html.website-compact .apple-04__globalnav {
   align-items: center;
   justify-content: flex-start;
   gap: 0;
-  padding: 0 10px 0 4px;
+  height: 140px;
+  padding: 0 24px 0 12px;
   overflow: visible;
   z-index: 40;
   border-bottom: 1px solid rgb(210, 210, 215);
@@ -76,7 +77,7 @@ html.website-compact .ul-globalnav-list-ul-globalnav-list-1 {
   flex: 1;
   width: auto;
   min-width: 0;
-  height: 44px;
+  height: 140px;
   padding: 0 4px;
   overflow: visible;
 }
@@ -87,8 +88,11 @@ html.website-compact .ul-globalnav-list-apple-2 {
   top: 0;
   transform: translateX(-50%);
   width: auto;
-  height: 44px;
+  height: 140px;
   padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 html.website-compact .ul-globalnav-list-apple-5 {
@@ -99,20 +103,34 @@ html.website-compact .ul-globalnav-list-apple-5 {
   clip: rect(0, 0, 0, 0);
 }
 
+html.website-compact .ul-globalnav-list-svg-3 {
+  padding-top: 0 !important;
+  width: 42px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html.website-compact .ul-globalnav-list-svg-3 svg {
+  width: 38px !important;
+  height: 46px !important;
+}
+
 html.website-compact .ul-globalnav-list-div-6 {
   display: none;
   flex-direction: column;
   align-items: stretch;
   gap: 0;
   position: absolute;
-  top: 44px;
-  left: -48px;
+  top: 140px;
+  left: 0;
   right: auto;
   width: 1440px !important;
   height: auto !important;
   min-height: 0;
   margin: 0;
-  padding: 4px 24px 20px 68px;
+  padding: 20px 56px 36px;
   box-sizing: border-box;
   background: rgb(242, 242, 242);
   border-bottom: 1px solid rgb(210, 210, 215);
@@ -140,7 +158,7 @@ html.website-compact .ul-globalnav-list-div-6 > [class*="ul-globalnav-list-suppo
   max-width: none !important;
   height: auto !important;
   min-height: 0;
-  padding: 11px 0 !important;
+  padding: 20px 0 !important;
   box-sizing: border-box;
 }
 
@@ -178,8 +196,8 @@ html.website-compact .ul-globalnav-list-div-6 span[class*="ul-globalnav-list-sup
   top: auto !important;
   width: auto !important;
   height: auto !important;
-  font-size: 17px !important;
-  line-height: 22px !important;
+  font-size: 36px !important;
+  line-height: 44px !important;
   letter-spacing: -0.02em;
   color: rgba(0, 0, 0, 0.88);
   white-space: nowrap;
@@ -189,17 +207,34 @@ html.website-compact .ul-globalnav-list-svg-47,
 html.website-compact .ul-globalnav-list-svg-48 {
   position: static;
   flex: 0 0 auto;
+  width: 72px;
+  height: 140px;
   margin-left: 8px;
+  padding-top: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html.website-compact .ul-globalnav-list-svg-47 svg {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+html.website-compact .ul-globalnav-list-svg-48 svg {
+  width: 38px !important;
+  height: 44px !important;
 }
 
 html.website-compact .ul-globalnav-list-ul-globalnav-list-1 > .ul-globalnav-list-svg-47 {
   margin-left: auto;
 }
 
-/* Chapter nav: scroll horizontally; hug content so banner sits flush */
+/* Chapter nav: same enlarged size on all tablets */
 html.website-compact .apple-04__chapternav {
+  top: 140px;
   width: 1440px;
-  height: 104px;
+  height: 156px;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
@@ -211,7 +246,7 @@ html.website-compact .apple-04__chapternav {
 html.website-compact .nav-chapternav-nav-chapternav-1 {
   width: max-content;
   min-width: 100%;
-  height: 104px;
+  height: 156px;
   background: rgb(251, 251, 253);
 }
 
@@ -220,12 +255,12 @@ html.website-compact .nav-chapternav-ul-2 {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 6px;
+  gap: 12px;
   left: 0 !important;
   top: 0 !important;
   width: max-content;
-  height: 104px;
-  padding: 4px 16px 0;
+  height: 156px;
+  padding: 11px 17px 8px;
   box-sizing: border-box;
 }
 
@@ -251,9 +286,11 @@ html.website-compact .apple-04__chapternav [class*="nav-chapternav-a-"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 118px;
-  min-width: 118px;
-  height: 96px;
+  width: 204px;
+  min-width: 204px;
+  height: auto;
+  min-height: 132px;
+  gap: 0;
   cursor: pointer;
 }
 
@@ -261,16 +298,16 @@ html.website-compact .apple-04__chapternav [class*="nav-chapternav-figure-"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 54px;
-  margin-bottom: 2px;
+  width: 72px;
+  height: 78px;
+  margin-bottom: 6px;
   flex-shrink: 0;
 }
 
 html.website-compact .apple-04__chapternav [class*="nav-chapternav-figure-"] img {
-  width: 40px !important;
+  width: 66px !important;
   height: auto !important;
-  max-height: 54px;
+  max-height: 78px;
   object-fit: contain;
 }
 
@@ -282,26 +319,31 @@ html.website-compact .apple-04__chapternav [class*="nav-chapternav-accessories"]
 html.website-compact .apple-04__chapternav [class*="nav-chapternav-apple-card"],
 html.website-compact .apple-04__chapternav [class*="nav-chapternav-ios"],
 html.website-compact .apple-04__chapternav [class*="nav-chapternav-shop"] {
-  width: auto;
-  max-width: 118px;
-  font-size: 12px !important;
-  line-height: 14px !important;
+  display: block;
+  width: 100%;
+  max-width: 204px;
+  height: auto !important;
+  font-size: 29px !important;
+  line-height: 31px !important;
   white-space: nowrap;
   text-align: center;
 }
 
 html.website-compact .apple-04__chapternav [class*="nav-chapternav-new-"] {
-  margin-top: 1px;
-  font-size: 10px !important;
-  line-height: 12px !important;
+  display: block;
+  width: auto !important;
+  height: auto !important;
+  margin-top: 4px;
+  font-size: 17px !important;
+  line-height: 19px !important;
 }
 
-/* Main follows shorter chapter strip (44 + 104) — no gap under chapter nav */
+/* 140 global + 156 chapter */
 html.website-compact .apple-04__main {
-  top: 148px;
+  top: 296px;
 }
 
-/* —— Mobile (≤767): fill screen + larger navbars —— */
+/* —— Mobile (≤767): fill screen + phone-only layout —— */
 @media (max-width: 767px) {
   html.website-mobile,
   html.website-mobile body,
