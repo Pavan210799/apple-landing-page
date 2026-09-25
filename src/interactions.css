@@ -421,7 +421,7 @@
 }
 
 .main-main-div-131 .main-main-figure-138 {
-  transform: translate3d(-48px, 0, 0); /* wide art enters from left */
+  transform: translate3d(48px, 0, 0); /* wide art enters from right */
 }
 
 .main-main-div-111.scroll-rise.is-in .main-main-figure-118,

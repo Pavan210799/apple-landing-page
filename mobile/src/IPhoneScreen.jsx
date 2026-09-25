@@ -952,7 +952,7 @@ export default function IPhoneScreen() {
             </View>
           </View>
           <View onLayout={mark("airpods")} style={styles.bleedCard}>
-            <SlideRevealImage source={photos.airpods} ratio={1063 / 498} from="left" style={styles.photoTop} />
+            <SlideRevealImage source={photos.airpods} ratio={1063 / 498} from="right" style={styles.photoTop} />
             <View style={styles.bleedCopy}>
               <Text style={[styles.cardTitle, styles.centerTitle]}>Magic runs in the family.</Text>
               <Text style={styles.body}>Explore all AirPods models and find the best ones for you.</Text>
