@@ -79,8 +79,35 @@
   outline-offset: 3px;
 }
 
+/* Compare blank marks: lock to thin 6×1 dashes (UA button chrome thickens them). */
 .apple-04 button[class*="pseudo"] {
   pointer-events: none;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 50px !important;
+  box-shadow: none !important;
+  outline: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 6px !important;
+  max-height: 1px !important;
+  width: 6px !important;
+  height: 1px !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+  background-color: rgb(29, 29, 31) !important;
+  background-image: none !important;
+  color: transparent !important;
+  /* Optical thinness vs 1 CSS px reading heavy at 1× / on scaled canvases */
+  transform: scaleY(0.55) !important;
+  transform-origin: center center !important;
+  overflow: hidden !important;
+  cursor: default;
 }
 
 .page-overlay {
@@ -295,37 +322,132 @@
   color: rgb(29, 29, 31);
 }
 
-/* Benefit cards: icon-only jump on card hover */
+/* Image bounce — matches app useBounce (lift + scale, then spring settle) */
+.main-main-div-3 .main-main-figure-17,
+.main-main-div-18 .main-main-figure-31,
+.main-main-div-32 .main-main-figure-46,
+.main-main-div-62 .main-main-figure-63,
+.main-main-div-111 .main-main-figure-118,
+.main-main-div-119 .main-main-figure-130,
+.main-main-div-131 .main-main-figure-138,
 .main-main-div-143 .main-main-figure-149,
 .main-main-div-150 .main-main-figure-152,
-.main-main-div-158 .main-main-figure-165 {
-  transform: translateY(0);
-  transition: transform 0.35s cubic-bezier(0.34, 1.45, 0.64, 1);
+.main-main-div-158 .main-main-figure-165,
+.main-main-div-188 .main-main-figure-189,
+.main-main-div-324 .main-main-figure-325,
+.main-main-div-382 .main-main-figure-383,
+.main-main-div-438 .main-main-figure-439,
+.main-main-div-490 .main-main-figure-491,
+.main-main-div-music-gallery-244 .main-main-music-album-left-erm7o9e8f9me-large-jpg-258,
+.main-main-div-music-gallery-244 .main-main-music-album-middle-eo1xuly5gmqa-large-jpg-260,
+.main-main-div-music-gallery-244 .main-main-music-album-right-ctoplsymatsi-large-jpg-262,
+.main-main-div-284 .main-main-figure-297,
+.nav-chapternav-ul-2 [class*="nav-chapternav-figure-"] img {
+  transform: translate3d(0, 0, 0) scale(1);
   will-change: transform;
 }
 
+.main-main-div-3:hover .main-main-figure-17,
+.main-main-div-18:hover .main-main-figure-31,
+.main-main-div-32:hover .main-main-figure-46,
+.main-main-div-62:hover .main-main-figure-63,
+.main-main-div-111:hover .main-main-figure-118,
+.main-main-div-119:hover .main-main-figure-130,
+.main-main-div-131:hover .main-main-figure-138,
 .main-main-div-143:hover .main-main-figure-149,
 .main-main-div-150:hover .main-main-figure-152,
-.main-main-div-158:hover .main-main-figure-165 {
-  animation: benefit-icon-jump 0.55s cubic-bezier(0.34, 1.45, 0.64, 1);
+.main-main-div-158:hover .main-main-figure-165,
+.main-main-div-188:hover .main-main-figure-189,
+.main-main-div-324:hover .main-main-figure-325,
+.main-main-div-382:hover .main-main-figure-383,
+.main-main-div-438:hover .main-main-figure-439,
+.main-main-div-490:hover .main-main-figure-491,
+.main-main-div-music-gallery-244:hover .main-main-music-album-left-erm7o9e8f9me-large-jpg-258,
+.main-main-div-music-gallery-244:hover .main-main-music-album-middle-eo1xuly5gmqa-large-jpg-260,
+.main-main-div-music-gallery-244:hover .main-main-music-album-right-ctoplsymatsi-large-jpg-262,
+.main-main-div-284:hover .main-main-figure-297,
+.nav-chapternav-ul-2 > [class*="nav-chapternav-a-"]:hover [class*="nav-chapternav-figure-"] img {
+  animation: app-image-bounce 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-@keyframes benefit-icon-jump {
-  0% {
-    transform: translateY(0);
-  }
-  28% {
-    transform: translateY(-14px);
-  }
-  52% {
-    transform: translateY(-2px);
-  }
-  72% {
-    transform: translateY(-9px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+/* Arcade: character logo only — wordmark / body copy stay still */
+.main-main-div-270:hover .main-main-div-271 {
+  animation: arcade-logo-bob 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Kill text / wordmark jumps on News, Arcade, Gift Card */
+.main-main-div-263:hover .main-main-div-265,
+.main-main-div-263:hover .main-main-get-3-months-of-apple-news-free-when-you-buy-an-iphone-12-267,
+.main-main-div-263:hover .main-main-p-266,
+.main-main-div-263:hover .main-main-learn-more-about-apple-news-268,
+.main-main-div-263:hover .main-main-learn-more-269,
+.main-main-apple-news-plus-184,
+.main-main-div-270:hover .main-main-div-275,
+.main-main-div-270:hover .main-main-apple-arcade-273,
+.main-main-div-270:hover .main-main-get-3-months-of-apple-arcade-free-when-you-buy-an-iphone-276,
+.main-main-div-270:hover .main-main-h2-272,
+.main-main-div-270:hover .main-main-ul-277,
+.main-main-div-270:hover .main-main-try-it-free13-280,
+.main-main-div-270:hover .main-main-learn-more-283,
+.main-main-div-298:hover .main-main-div-300,
+.main-main-div-298:hover .main-main-for-everything-and-everyone-301,
+.main-main-div-298:hover .main-main-apple-gift-card-307,
+.main-main-div-298:hover .main-main-h2-306,
+.main-main-div-298:hover .main-main-learn-more-303,
+.main-main-div-298:hover .main-main-buy-305,
+.main-main-apple-gift-card-307,
+.main-main-for-everything-and-everyone-301 {
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Featured accessories: slide in from card side when section rises */
+.main-main-div-111 .main-main-figure-118,
+.main-main-div-119 .main-main-figure-130,
+.main-main-div-131 .main-main-figure-138 {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform, opacity;
+}
+
+.main-main-div-111 .main-main-figure-118 {
+  transform: translate3d(64px, 0, 0); /* image on right */
+}
+
+.main-main-div-119 .main-main-figure-130 {
+  transform: translate3d(-64px, 0, 0); /* image on left */
+}
+
+.main-main-div-131 .main-main-figure-138 {
+  transform: translate3d(-48px, 0, 0); /* wide art enters from left */
+}
+
+.main-main-div-111.scroll-rise.is-in .main-main-figure-118,
+.main-main-div-119.scroll-rise.is-in .main-main-figure-130,
+.main-main-div-131.scroll-rise.is-in .main-main-figure-138,
+.main-main-div-111:not(.scroll-rise) .main-main-figure-118,
+.main-main-div-119:not(.scroll-rise) .main-main-figure-130,
+.main-main-div-131:not(.scroll-rise) .main-main-figure-138 {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes app-image-bounce {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  28% { transform: translate3d(0, -12px, 0) scale(1.05); }
+  55% { transform: translate3d(0, 2px, 0) scale(0.99); }
+  75% { transform: translate3d(0, -3px, 0) scale(1.015); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes arcade-logo-bob {
+  0% { background-position: 236px 292px; }
+  28% { background-position: 236px 278px; }
+  55% { background-position: 236px 296px; }
+  75% { background-position: 236px 286px; }
+  100% { background-position: 236px 292px; }
 }
 
 @keyframes page-overlay-in {
@@ -350,22 +472,38 @@
   .page-sheet-close,
   .page-overlay,
   .page-sheet,
-  .scroll-rise {
-    animation: none;
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
-
+  .scroll-rise,
+  .main-main-div-3 .main-main-figure-17,
+  .main-main-div-18 .main-main-figure-31,
+  .main-main-div-32 .main-main-figure-46,
+  .main-main-div-62 .main-main-figure-63,
+  .main-main-div-111 .main-main-figure-118,
+  .main-main-div-119 .main-main-figure-130,
+  .main-main-div-131 .main-main-figure-138,
   .main-main-div-143 .main-main-figure-149,
   .main-main-div-150 .main-main-figure-152,
-  .main-main-div-158 .main-main-figure-165 {
-    transition: none;
+  .main-main-div-158 .main-main-figure-165,
+  .main-main-div-188 .main-main-figure-189,
+  .main-main-div-324 .main-main-figure-325,
+  .main-main-div-382 .main-main-figure-383,
+  .main-main-div-438 .main-main-figure-439,
+  .main-main-div-490 .main-main-figure-491,
+  .main-main-div-music-gallery-244 .main-main-music-album-left-erm7o9e8f9me-large-jpg-258,
+  .main-main-div-music-gallery-244 .main-main-music-album-middle-eo1xuly5gmqa-large-jpg-260,
+  .main-main-div-music-gallery-244 .main-main-music-album-right-ctoplsymatsi-large-jpg-262,
+  .main-main-div-270 .main-main-div-271,
+  .main-main-div-284 .main-main-figure-297,
+  .nav-chapternav-ul-2 [class*="nav-chapternav-figure-"] img {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1;
   }
 
-  .main-main-div-143:hover .main-main-figure-149,
-  .main-main-div-150:hover .main-main-figure-152,
-  .main-main-div-158:hover .main-main-figure-165 {
-    animation: none;
+  .main-main-div-111 .main-main-figure-118,
+  .main-main-div-119 .main-main-figure-130,
+  .main-main-div-131 .main-main-figure-138 {
+    opacity: 1;
+    transform: none;
   }
 }

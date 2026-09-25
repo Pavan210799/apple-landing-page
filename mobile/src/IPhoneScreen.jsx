@@ -22,6 +22,15 @@ const riseChecks = new Set();
 const riseFrame = { y: 0, height: 0 };
 let riseReduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
+function syncRiseFrame() {
+  if (typeof window !== "undefined") {
+    // RN-web ScrollView measureInWindow can report content height; use the real viewport.
+    riseFrame.y = 0;
+    riseFrame.height = window.innerHeight || document.documentElement.clientHeight || 0;
+    runRiseChecks();
+  }
+}
+
 function runRiseChecks() {
   riseChecks.forEach((check) => check());
 }
@@ -61,6 +70,148 @@ function Rise({ children, style, onLayout }) {
         {children}
       </Animated.View>
     </View>
+  );
+}
+
+/** Image split: left half slides from left, right half from right when scrolled into view. */
+function SplitRevealImage({ source, ratio, style }) {
+  const host = useRef(null);
+  const shown = useRef(false);
+  const leftX = useRef(new Animated.Value(riseReduced ? 0 : -120)).current;
+  const rightX = useRef(new Animated.Value(riseReduced ? 0 : 120)).current;
+
+  useEffect(() => {
+    if (riseReduced) {
+      leftX.setValue(0);
+      rightX.setValue(0);
+      return undefined;
+    }
+    const check = () => {
+      const node = host.current;
+      if (!node?.measureInWindow || riseFrame.height <= 0) return;
+      node.measureInWindow((x, y, width, height) => {
+        if (!height) return;
+        const top = Math.max(y, riseFrame.y);
+        const bottom = Math.min(y + height, riseFrame.y + riseFrame.height);
+        const inView = Math.max(0, bottom - top) / height >= 0.2;
+        if (inView === shown.current) return;
+        shown.current = inView;
+        Animated.parallel([
+          Animated.timing(leftX, { toValue: inView ? 0 : -120, duration: 780, easing: riseEase, useNativeDriver: false }),
+          Animated.timing(rightX, { toValue: inView ? 0 : 120, duration: 780, easing: riseEase, useNativeDriver: false }),
+        ]).start();
+      });
+    };
+    riseChecks.add(check);
+    const kick = setTimeout(check, 120);
+    return () => {
+      clearTimeout(kick);
+      riseChecks.delete(check);
+    };
+  }, [leftX, rightX]);
+
+  return (
+    <View
+      ref={host}
+      collapsable={false}
+      onLayout={runRiseChecks}
+      style={[styles.splitReveal, style]}
+    >
+      <Image source={source} resizeMode="contain" style={[styles.fullImage, styles.splitSizer, { aspectRatio: ratio }]} />
+      <Animated.View style={[styles.splitHalf, styles.splitLeft, { transform: [{ translateX: leftX }] }]}>
+        <Image source={source} resizeMode="cover" style={styles.splitImage} />
+      </Animated.View>
+      <Animated.View style={[styles.splitHalf, styles.splitRight, { transform: [{ translateX: rightX }] }]}>
+        <Image source={source} resizeMode="cover" style={[styles.splitImage, styles.splitImageRight]} />
+      </Animated.View>
+    </View>
+  );
+}
+
+/** Single image slides in from left or right. */
+function SlideRevealImage({ source, ratio, from = "left", style }) {
+  const host = useRef(null);
+  const shown = useRef(false);
+  const start = from === "right" ? 100 : -100;
+  const shift = useRef(new Animated.Value(riseReduced ? 0 : start)).current;
+
+  useEffect(() => {
+    if (riseReduced) {
+      shift.setValue(0);
+      return undefined;
+    }
+    const check = () => {
+      const node = host.current;
+      if (!node?.measureInWindow || riseFrame.height <= 0) return;
+      node.measureInWindow((x, y, width, height) => {
+        if (!height) return;
+        const top = Math.max(y, riseFrame.y);
+        const bottom = Math.min(y + height, riseFrame.y + riseFrame.height);
+        const inView = Math.max(0, bottom - top) / height >= 0.2;
+        if (inView === shown.current) return;
+        shown.current = inView;
+        Animated.timing(shift, {
+          toValue: inView ? 0 : start,
+          duration: 780,
+          easing: riseEase,
+          useNativeDriver: false,
+        }).start();
+      });
+    };
+    riseChecks.add(check);
+    const kick = setTimeout(check, 120);
+    return () => {
+      clearTimeout(kick);
+      riseChecks.delete(check);
+    };
+  }, [shift, start]);
+
+  return (
+    <View ref={host} collapsable={false} onLayout={runRiseChecks} style={[{ overflow: "hidden", width: "100%" }, style]}>
+      <Animated.View style={{ transform: [{ translateX: shift }] }}>
+        <Image source={source} resizeMode="contain" style={[styles.fullImage, { aspectRatio: ratio }]} />
+      </Animated.View>
+    </View>
+  );
+}
+
+function useBounce() {
+  const y = useRef(new Animated.Value(0)).current;
+  const scale = useRef(new Animated.Value(1)).current;
+  const bounce = () => {
+    if (riseReduced) return;
+    y.stopAnimation();
+    scale.stopAnimation();
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(y, { toValue: -12, duration: 150, easing: riseEase, useNativeDriver: false }),
+        Animated.timing(scale, { toValue: 1.05, duration: 150, easing: riseEase, useNativeDriver: false }),
+      ]),
+      Animated.parallel([
+        Animated.spring(y, { toValue: 0, friction: 4, tension: 260, useNativeDriver: false }),
+        Animated.spring(scale, { toValue: 1, friction: 5, tension: 280, useNativeDriver: false }),
+      ]),
+    ]).start();
+  };
+  return { bounce, style: { transform: [{ translateY: y }, { scale }] } };
+}
+
+function BouncePress({ children, onPress, style, contentStyle, accessibilityRole, accessibilityLabel, hitSlop }) {
+  const { bounce, style: bounceStyle } = useBounce();
+  return (
+    <Pressable
+      accessibilityRole={accessibilityRole}
+      accessibilityLabel={accessibilityLabel}
+      hitSlop={hitSlop}
+      onPress={(event) => {
+        bounce();
+        onPress?.(event);
+      }}
+      onHoverIn={bounce}
+      style={style}
+    >
+      <Animated.View style={[contentStyle, bounceStyle]}>{children}</Animated.View>
+    </Pressable>
   );
 }
 
@@ -313,6 +464,7 @@ function Actions({ buy, learn, light }) {
 }
 
 function Hero({ id, mark, kicker, word, title, titleStyle, price, photo, photoStyle, dark, buy, learn }) {
+  const { bounce, style: bounceStyle } = useBounce();
   return (
     <Rise onLayout={mark(id)} style={[styles.hero, dark && styles.heroDark]}>
       {kicker ? <Text style={[styles.kicker, dark && styles.onDark]}>{kicker}</Text> : null}
@@ -320,7 +472,17 @@ function Hero({ id, mark, kicker, word, title, titleStyle, price, photo, photoSt
       {title ? <Text style={[styles.heroTitle, dark && styles.onDark, titleStyle]}>{title}</Text> : null}
       <Text style={[styles.price, dark && styles.priceDark]}>{price}</Text>
       <Actions buy={buy} learn={learn} light={dark} />
-      <Image source={photo} style={photoStyle || styles.heroPhoto} resizeMode="contain" />
+      <Pressable
+        onPress={bounce}
+        onHoverIn={bounce}
+        style={{ width: "100%", alignSelf: "stretch" }}
+      >
+        <Animated.Image
+          source={photo}
+          style={[photoStyle || styles.heroPhoto, bounceStyle]}
+          resizeMode="contain"
+        />
+      </Pressable>
     </Rise>
   );
 }
@@ -332,10 +494,21 @@ function FullImage({ source, ratio, style }) {
 function CompareCard({ phone, title, price, buy, learn, specs }) {
   const [windowHeight, setWindowHeight] = useState(0);
   const [atEnd, setAtEnd] = useState(false);
+  const { bounce, style: bounceStyle } = useBounce();
   const canScroll = specs.length > 10;
   return (
     <View style={styles.compareCard}>
-      <Image source={phone} style={styles.comparePhone} resizeMode="contain" />
+      <Pressable
+        onPress={bounce}
+        onHoverIn={bounce}
+        style={{ width: "100%", alignSelf: "stretch" }}
+      >
+        <Animated.Image
+          source={phone}
+          style={[styles.comparePhone, bounceStyle]}
+          resizeMode="contain"
+        />
+      </Pressable>
       <Text style={styles.compareTitle}>{title}</Text>
       <Text style={styles.comparePrice}>{price}</Text>
       <Actions buy={buy} learn={learn} />
@@ -491,6 +664,10 @@ export default function IPhoneScreen() {
   }
 
   function syncRise() {
+    if (typeof window !== "undefined") {
+      syncRiseFrame();
+      return;
+    }
     scrollRef.current?.measureInWindow((x, y, width, height) => {
       if (!height) return;
       riseFrame.y = y;
@@ -498,6 +675,18 @@ export default function IPhoneScreen() {
       runRiseChecks();
     });
   }
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    syncRiseFrame();
+    const onScroll = () => syncRiseFrame();
+    window.addEventListener("scroll", onScroll, true);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   function jump(id) {
     const y = spots.current[id];
@@ -547,7 +736,7 @@ export default function IPhoneScreen() {
         <View style={styles.chapterClip}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chapterBar} contentContainerStyle={styles.chapterRow}>
             {chapters.map(([id, label, icon]) => (
-              <Pressable
+              <BouncePress
                 key={id}
                 accessibilityRole="button"
                 onPress={() => {
@@ -556,10 +745,11 @@ export default function IPhoneScreen() {
                   else jump(id);
                 }}
                 style={styles.chapter}
+                contentStyle={styles.chapterBounce}
               >
                 <Image source={icon} style={styles.chapterIcon} resizeMode="contain" />
                 <Text numberOfLines={2} style={styles.chapterLabel}>{label}</Text>
-              </Pressable>
+              </BouncePress>
             ))}
           </ScrollView>
         </View>
@@ -708,7 +898,7 @@ export default function IPhoneScreen() {
         <Rise onLayout={mark("trade")} style={styles.block}>
           <Text style={styles.sectionTitle}>Ways to save on iPhone</Text>
           <View style={styles.bleedCard}>
-            <FullImage source={photos.trade} ratio={1380 / 410} style={styles.photoTop} />
+            <SplitRevealImage source={photos.trade} ratio={1380 / 410} style={styles.photoTop} />
             <View style={styles.bleedCopy}>
               <Text style={styles.cardTitle}>Trade in your current phone for credit toward a new one.</Text>
               <Text style={styles.body}>Get $200–$600 in credit when you trade in iPhone 11 or higher and upgrade to iPhone 14 or iPhone 14 Pro.</Text>
@@ -726,7 +916,7 @@ export default function IPhoneScreen() {
             <LinkText label="Find your deal" onPress={() => open(shop.deals)} />
           </View>
           <View onLayout={mark("card")} style={styles.bleedCard}>
-            <FullImage source={photos.card} ratio={675 / 357} style={styles.photoTop} />
+            <SplitRevealImage source={photos.card} ratio={675 / 357} style={styles.photoTop} />
             <View style={styles.bleedCopy}>
               <Text style={styles.cardTitle}>Get 3% Daily Cash back with Apple Card.</Text>
               <Text style={styles.body}>And pay for your new iPhone over 24 months, interest-free when you choose to check out with Apple Card Monthly Installments.</Text>
@@ -743,7 +933,7 @@ export default function IPhoneScreen() {
         <Rise onLayout={mark("accessories")} style={styles.block}>
           <Text style={styles.sectionTitle}>Featured accessories</Text>
           <View style={styles.bleedCard}>
-            <FullImage source={photos.magsafe} ratio={633 / 463} style={styles.photoTop} />
+            <SlideRevealImage source={photos.magsafe} ratio={633 / 463} from="right" style={styles.photoTop} />
             <View style={styles.bleedCopy}>
               <Text style={[styles.cardTitle, styles.centerTitle]}>MagSafe</Text>
               <Text style={styles.body}>Snap on a magnetic case, wallet, or both. And get faster wireless charging.</Text>
@@ -751,7 +941,7 @@ export default function IPhoneScreen() {
             </View>
           </View>
           <View onLayout={mark("airtag")} style={styles.bleedCard}>
-            <FullImage source={photos.airtag} ratio={806 / 531} />
+            <SlideRevealImage source={photos.airtag} ratio={806 / 531} from="left" />
             <View style={styles.bleedCopy}>
               <Text style={[styles.cardTitle, styles.centerTitle]}>AirTag</Text>
               <Text style={styles.body}>Attach one to your keys. Put another in your backpack. If they’re misplaced, just use the Find My app.</Text>
@@ -762,7 +952,7 @@ export default function IPhoneScreen() {
             </View>
           </View>
           <View onLayout={mark("airpods")} style={styles.bleedCard}>
-            <FullImage source={photos.airpods} ratio={1063 / 498} style={styles.photoTop} />
+            <SlideRevealImage source={photos.airpods} ratio={1063 / 498} from="left" style={styles.photoTop} />
             <View style={styles.bleedCopy}>
               <Text style={[styles.cardTitle, styles.centerTitle]}>Magic runs in the family.</Text>
               <Text style={styles.body}>Explore all AirPods models and find the best ones for you.</Text>
@@ -777,10 +967,10 @@ export default function IPhoneScreen() {
             [photos.payments, "Flexible payments"],
             [photos.sessions, "Guided sessions"],
           ].map(([source, label]) => (
-            <View key={label} style={styles.perk}>
+            <BouncePress key={label} style={styles.perk} contentStyle={styles.perkBounce} onPress={() => {}}>
               <Image source={source} style={styles.perkIcon} resizeMode="contain" />
               <Text style={styles.perkLabel}>{label}</Text>
-            </View>
+            </BouncePress>
           ))}
         </Rise>
 
@@ -1088,6 +1278,32 @@ const styles = StyleSheet.create({
     minHeight: 180,
   },
   riseHost: { width: "100%", alignSelf: "stretch" },
+  splitReveal: {
+    width: "100%",
+    alignSelf: "stretch",
+    overflow: "hidden",
+    position: "relative",
+  },
+  splitSizer: {
+    opacity: 0,
+  },
+  splitHalf: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    width: "50%",
+    overflow: "hidden",
+  },
+  splitLeft: { left: 0 },
+  splitRight: { right: 0 },
+  splitImage: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "200%",
+    height: "100%",
+  },
+  splitImageRight: { left: "-100%" },
   nav: {
     height: 48,
     paddingHorizontal: 16,
@@ -1113,6 +1329,7 @@ const styles = StyleSheet.create({
   chapterBar: { width: "100%", maxHeight: 96 },
   chapterRow: { paddingHorizontal: 8, alignItems: "center" },
   chapter: { width: 84, overflow: "hidden", alignItems: "center", justifyContent: "flex-start", paddingTop: 8, paddingHorizontal: 4, gap: 4 },
+  chapterBounce: { width: "100%", alignItems: "center", gap: 4 },
   chapterIcon: { width: 28, height: 40 },
   bag: { width: 16, height: 18, alignItems: "center", justifyContent: "center" },
   bagHandle: {
@@ -1219,6 +1436,7 @@ const styles = StyleSheet.create({
   carrier: { width: 88, maxWidth: "30%", height: 28 },
   perkRow: { flexDirection: "row", gap: 8, paddingHorizontal: 12 },
   perk: { flex: 1, backgroundColor: "#fff", borderRadius: 18, padding: 12, alignItems: "center", gap: 8 },
+  perkBounce: { width: "100%", alignItems: "center", gap: 8 },
   perkIcon: { width: 48, height: 48 },
   perkLabel: { fontFamily: font, fontSize: 12, lineHeight: 16, color: "#1d1d1f", textAlign: "center" },
   serviceMark: { width: 140, height: 28 },

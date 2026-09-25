@@ -726,6 +726,13 @@ html.website-compact .apple-04__main {
     height: auto;
     flex-shrink: 0;
     object-fit: contain;
+    transform: translate3d(0, 0, 0) scale(1);
+    will-change: transform;
+  }
+
+  html.website-mobile .mobile-compare__header:hover .mobile-compare__phone,
+  html.website-mobile .mobile-compare__card.is-open .mobile-compare__phone {
+    animation: app-image-bounce 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   html.website-mobile .mobile-compare__summary {
@@ -867,5 +874,19 @@ html.website-compact .apple-04__main {
 
   html.website-mobile .mobile-compare__links a::after {
     content: " ›";
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.website-mobile .mobile-compare__phone {
+    transition: none;
+    transform: none;
+    animation: none;
+  }
+
+  html.website-mobile .mobile-compare__header:hover .mobile-compare__phone,
+  html.website-mobile .mobile-compare__card.is-open .mobile-compare__phone {
+    animation: none;
+    transform: none;
   }
 }
