@@ -163,14 +163,29 @@ function open(url) {
   Linking.openURL(url);
 }
 
-function AppleMark() {
-  return <Text style={styles.apple}>{"\uF8FF"}</Text>;
+const APPLE_LOGO_PATH =
+  "M11.48 9.07c-.02-2.03 1.66-3.01 1.74-3.06-0.95-1.39-2.43-1.58-2.95-1.6-1.25-.13-2.45.74-3.08.74-.64 0-1.62-.72-2.67-.7-1.37.02-2.64.8-3.35 2.03-1.43 2.48-.37 6.14 1.02 8.15.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.67 2.67-.67s1.6.67 2.68.65c1.11-.02 1.81-1 2.49-1.99.78-1.14 1.1-2.25 1.12-2.31-.02-.01-2.15-.82-2.17-3.3zM9.7 2.77c.57-.69.95-1.64.85-2.6-.82.03-1.81.55-2.4 1.24-.52.61-.98 1.59-.86 2.52.91.07 1.84-.46 2.41-1.16z";
+
+function appleLogoUri(color = "#1d1d1f") {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 17" fill="${color}"><path d="${APPLE_LOGO_PATH}"/></svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function AppleMark({ size = 18, color = "#1d1d1f", style }) {
+  const height = Math.round((size * 17) / 14);
+  return (
+    <Image
+      source={{ uri: appleLogoUri(color) }}
+      style={[{ width: size, height }, style]}
+      accessibilityIgnoresInvertColors
+    />
+  );
 }
 
 function ServiceHeading({ word }) {
   return (
     <View style={styles.lockup}>
-      <Text style={styles.lockupMark}>{"\uF8FF"}</Text>
+      <AppleMark size={20} style={styles.lockupMark} />
       <Text style={styles.lockupWord}>{word}</Text>
     </View>
   );
@@ -1087,7 +1102,6 @@ const styles = StyleSheet.create({
   navColEnd: { justifyContent: "flex-end", gap: 14 },
   navAction: { width: 28, height: 28, alignItems: "center", justifyContent: "center" },
   navIcon: { fontFamily: font, fontSize: 20, color: "#1d1d1f", lineHeight: 20 },
-  apple: { fontFamily: font, fontSize: 20, color: "#1d1d1f" },
   chapterClip: {
     width: "100%",
     maxWidth: "100%",
@@ -1179,8 +1193,8 @@ const styles = StyleSheet.create({
   centeredCopy: { width: "100%", paddingHorizontal: 18, paddingTop: 16, paddingBottom: 18, gap: 12, alignItems: "center" },
   arcadeMark: { width: 132, height: 122, alignSelf: "center", marginTop: 22 },
   lockup: { flexDirection: "row", alignItems: "center", alignSelf: "center", gap: 6 },
-  lockupMark: { fontFamily: font, fontSize: 22, color: "#1d1d1f" },
-  lockupWord: { fontFamily: font, fontSize: 22, fontWeight: "600", color: "#1d1d1f" },
+  lockupMark: { marginTop: 1 },
+  lockupWord: { fontFamily: font, fontSize: 22, fontWeight: "600", color: "#1d1d1f", letterSpacing: -0.2 },
   block: { gap: 12, paddingTop: 8 },
   widePhoto: { width: "100%", height: 180, borderRadius: 12 },
   sectionTitle: { fontFamily: font, width: "100%", fontSize: 22, lineHeight: 26, fontWeight: "600", color: "#1d1d1f", letterSpacing: -0.2, paddingHorizontal: 20 },
