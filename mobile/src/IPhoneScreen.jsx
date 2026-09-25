@@ -448,7 +448,11 @@ function Pill({ label, onPress, light }) {
 
 function LinkText({ label, onPress, light }) {
   return (
-    <Pressable accessibilityRole="link" onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
+    <Pressable
+      accessibilityRole="link"
+      onPress={onPress}
+      style={({ pressed }) => [styles.linkPress, pressed && styles.pressed]}
+    >
       <Text style={[styles.link, light && styles.linkLight]}>{label}</Text>
     </Pressable>
   );
@@ -1388,6 +1392,7 @@ const styles = StyleSheet.create({
   pillText: { fontFamily: font, color: "#fff", fontSize: 15 },
   pillTextLight: { color: "#fff" },
   link: { fontFamily: font, color: "#0066cc", fontSize: 15 },
+  linkPress: { alignSelf: "center" },
   linkLight: { color: "#2997ff" },
   pressed: { opacity: 0.7 },
   heroPhoto: { width: "100%", maxWidth: "100%", height: 280 },

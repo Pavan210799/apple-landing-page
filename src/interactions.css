@@ -416,6 +416,12 @@
 
 .main-main-div-131 .main-main-figure-138 {
   transform: translate3d(48px, 0, 0); /* wide art enters from right */
+  z-index: 0;
+}
+
+/* Keep Magic runs copy / CTA above the sliding AirPods art */
+.main-main-div-131 .main-main-div-133 {
+  z-index: 2;
 }
 
 .main-main-div-111.scroll-rise.is-in .main-main-figure-118,
