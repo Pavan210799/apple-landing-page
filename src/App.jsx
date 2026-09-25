@@ -226,9 +226,32 @@ function App() {
     );
     nodes.forEach((node) => observer.observe(node));
 
+    const tradeFig = page.querySelector(".main-main-figure-63");
+    const tradeCard = page.querySelector(".main-main-div-62");
+    if (tradeFig && tradeCard && !tradeCard.querySelector(".trade-split-reveal")) {
+      const src = tradeFig.currentSrc || tradeFig.getAttribute("src");
+      if (src) {
+        tradeFig.classList.add("trade-split-source");
+        const wrap = document.createElement("div");
+        wrap.className = "trade-split-reveal";
+        const left = document.createElement("div");
+        left.className = "trade-split-half trade-split-half--left";
+        left.style.backgroundImage = `url("${src}")`;
+        const right = document.createElement("div");
+        right.className = "trade-split-half trade-split-half--right";
+        right.style.backgroundImage = `url("${src}")`;
+        wrap.append(left, right);
+        tradeFig.parentElement.insertBefore(wrap, tradeFig);
+      }
+    }
+
     return () => {
       observer.disconnect();
       nodes.forEach((node) => node.classList.remove("scroll-rise", "is-in"));
+      const split = page.querySelector(".trade-split-reveal");
+      const source = page.querySelector(".trade-split-source");
+      split?.remove();
+      source?.classList.remove("trade-split-source");
     };
   }, []);
 

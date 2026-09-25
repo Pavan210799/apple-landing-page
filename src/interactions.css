@@ -327,9 +327,6 @@
 .main-main-div-18 .main-main-figure-31,
 .main-main-div-32 .main-main-figure-46,
 .main-main-div-62 .main-main-figure-63,
-.main-main-div-111 .main-main-figure-118,
-.main-main-div-119 .main-main-figure-130,
-.main-main-div-131 .main-main-figure-138,
 .main-main-div-143 .main-main-figure-149,
 .main-main-div-150 .main-main-figure-152,
 .main-main-div-158 .main-main-figure-165,
@@ -351,9 +348,6 @@
 .main-main-div-18:hover .main-main-figure-31,
 .main-main-div-32:hover .main-main-figure-46,
 .main-main-div-62:hover .main-main-figure-63,
-.main-main-div-111:hover .main-main-figure-118,
-.main-main-div-119:hover .main-main-figure-130,
-.main-main-div-131:hover .main-main-figure-138,
 .main-main-div-143:hover .main-main-figure-149,
 .main-main-div-150:hover .main-main-figure-152,
 .main-main-div-158:hover .main-main-figure-165,
@@ -434,6 +428,57 @@
   transform: translate3d(0, 0, 0);
 }
 
+/* Trade-in: left/right split reveal (matches app) */
+.main-main-div-62 > :not(.trade-split-reveal):not(.trade-split-source) {
+  z-index: 1;
+}
+
+.main-main-figure-63.trade-split-source {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.trade-split-reveal {
+  position: absolute;
+  top: 307px;
+  left: 0;
+  width: 1380px;
+  height: 410px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.trade-split-half {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 1380px 410px;
+  transition: transform 0.78s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+
+.trade-split-half--left {
+  left: 0;
+  background-position: left top;
+  transform: translate3d(-120px, 0, 0);
+}
+
+.trade-split-half--right {
+  right: 0;
+  background-position: right top;
+  transform: translate3d(120px, 0, 0);
+}
+
+.main-main-div-62.scroll-rise.is-in .trade-split-half--left,
+.main-main-div-62.scroll-rise.is-in .trade-split-half--right,
+.main-main-div-62:not(.scroll-rise) .trade-split-half--left,
+.main-main-div-62:not(.scroll-rise) .trade-split-half--right {
+  transform: translate3d(0, 0, 0);
+}
+
 @keyframes app-image-bounce {
   0% { transform: translate3d(0, 0, 0) scale(1); }
   28% { transform: translate3d(0, -12px, 0) scale(1.05); }
@@ -505,5 +550,18 @@
   .main-main-div-131 .main-main-figure-138 {
     opacity: 1;
     transform: none;
+  }
+
+  .main-main-figure-63.trade-split-source {
+    opacity: 1;
+  }
+
+  .trade-split-reveal {
+    display: none;
+  }
+
+  .trade-split-half {
+    transition: none !important;
+    transform: none !important;
   }
 }
