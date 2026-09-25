@@ -208,9 +208,13 @@ function PageSkeleton() {
   return (
     <View style={styles.skeleton} accessibilityLabel="Loading page">
       <View style={styles.skeletonNav}>
-        <Bone style={styles.boneSm} />
-        <Bone style={styles.boneLogo} />
-        <View style={styles.skeletonNavSide}>
+        <View style={styles.navCol}>
+          <Bone style={styles.boneSm} />
+        </View>
+        <View style={styles.navColCenter}>
+          <Bone style={styles.boneLogo} />
+        </View>
+        <View style={[styles.navCol, styles.navColEnd]}>
           <Bone style={styles.boneIcon} />
           <Bone style={styles.boneIcon} />
         </View>
@@ -496,13 +500,17 @@ export default function IPhoneScreen() {
       {booting ? <PageSkeleton /> : null}
       <View style={[styles.appBody, booting && styles.appBodyHidden]}>
       <View style={styles.nav}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Menu" onPress={() => setMenuOpen(true)} hitSlop={8}>
-          <Text style={styles.navIcon}>☰</Text>
-        </Pressable>
-        <Pressable accessibilityRole="link" accessibilityLabel="Apple" onPress={() => open(pages.home)}>
-          <AppleMark />
-        </Pressable>
-        <View style={styles.navSide}>
+        <View style={styles.navCol}>
+          <Pressable accessibilityRole="button" accessibilityLabel="Menu" onPress={() => setMenuOpen(true)} hitSlop={8}>
+            <Text style={styles.navIcon}>☰</Text>
+          </Pressable>
+        </View>
+        <View style={styles.navColCenter}>
+          <Pressable accessibilityRole="link" accessibilityLabel="Apple" onPress={() => open(pages.home)}>
+            <AppleMark />
+          </Pressable>
+        </View>
+        <View style={[styles.navCol, styles.navColEnd]}>
           <Pressable accessibilityRole="button" accessibilityLabel="Search" onPress={() => setPanel("search")} hitSlop={8} style={styles.navAction}>
             <SearchMark />
           </Pressable>
@@ -1040,12 +1048,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
     backgroundColor: "rgba(251,251,253,0.94)",
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: "#d2d2d7",
   },
-  skeletonNavSide: { flexDirection: "row", gap: 14 },
   skeletonChapter: { paddingHorizontal: 12, paddingVertical: 14, gap: 16, backgroundColor: "#fbfbfd" },
   skeletonChapterItem: { alignItems: "center", gap: 8 },
   skeletonHero: {
@@ -1072,12 +1078,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
     backgroundColor: "rgba(251,251,253,0.94)",
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: "#d2d2d7",
   },
-  navSide: { flexDirection: "row", alignItems: "center", gap: 14 },
+  navCol: { flex: 1, flexDirection: "row", alignItems: "center" },
+  navColCenter: { flex: 1, alignItems: "center", justifyContent: "center" },
+  navColEnd: { justifyContent: "flex-end", gap: 14 },
   navAction: { width: 28, height: 28, alignItems: "center", justifyContent: "center" },
   navIcon: { fontFamily: font, fontSize: 20, color: "#1d1d1f", lineHeight: 20 },
   apple: { fontFamily: font, fontSize: 20, color: "#1d1d1f" },
