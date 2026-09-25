@@ -3,13 +3,20 @@ import UlGlobalnavList from "./generated/UlGlobalnavList";
 import NavChapternav from "./generated/NavChapternav";
 import MainMain from "./generated/MainMain";
 import FooterAcGlobalfooter from "./generated/FooterAcGlobalfooter";
+import PageSkeleton from "./PageSkeleton";
+import LegalFootnotesSheet from "./LegalFootnotesSheet";
+import WebsiteMobileFooter, { syncWebsiteMobileFooter } from "./WebsiteMobileFooter";
 import { findAction, prepareActions, releaseScrollContainers, scrollToSelector, searchJumps } from "./pageActions";
 import "./website-responsive.css";
+import "./PageSkeleton.css";
+import "./WebsiteMobileFooter.css";
 
 const PAGE_WIDTH = 1440;
 const PAGE_HEIGHT = 18663.27;
 const WEBSITE_COMPACT_MAX = 1024;
 const WEBSITE_MOBILE_MAX = 767;
+/** Accordion footer + legal modal: phone + tablet. Desktop keeps original footer. */
+const FOOTER_ACCORDION_MAX = WEBSITE_COMPACT_MAX;
 /** Tablet: mild zoom for readability. Phone uses exact fit-to-width. */
 const TABLET_SCALE_WIDTH = 1240;
 
@@ -51,7 +58,7 @@ function openHref(href) {
   window.open(href, "_blank", "noopener,noreferrer");
 }
 
-function PageSheet({ title, children, onClose }) {
+function PageSheet({ title, children, onClose, variant = "default" }) {
   return (
     <div
       className="page-overlay"
@@ -59,14 +66,19 @@ function PageSheet({ title, children, onClose }) {
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="page-sheet" role="dialog" aria-modal="true" aria-label={title}>
+      <div
+        className={`page-sheet${variant === "legal" ? " page-sheet--legal" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
+      >
         <div className="page-sheet-bar">
           <h2>{title}</h2>
-          <button className="page-sheet-close" type="button" onClick={onClose}>
+          <button className="page-sheet-close" type="button" onClick={onClose} aria-label="Close">
             Close
           </button>
         </div>
-        {children}
+        <div className="page-sheet-scroll">{children}</div>
       </div>
     </div>
   );
@@ -79,6 +91,9 @@ function App() {
   const [panel, setPanel] = useState(null);
   const [query, setQuery] = useState("");
   const [globalNavOpen, setGlobalNavOpen] = useState(false);
+  const [booting, setBooting] = useState(true);
+  const [skeletonLeaving, setSkeletonLeaving] = useState(false);
+  const [isPhoneFooter, setIsPhoneFooter] = useState(false);
 
   const jumps = useMemo(() => {
     const text = query.trim().toLowerCase();
@@ -98,8 +113,11 @@ function App() {
       );
       const compact = viewport <= WEBSITE_COMPACT_MAX;
       const mobile = viewport <= WEBSITE_MOBILE_MAX;
+      const phoneFooter = viewport <= FOOTER_ACCORDION_MAX;
       document.documentElement.classList.toggle("website-compact", compact);
       document.documentElement.classList.toggle("website-mobile", mobile);
+      document.documentElement.classList.toggle("website-phone-footer", phoneFooter);
+      setIsPhoneFooter(phoneFooter);
       if (!compact) setGlobalNavOpen(false);
       const scaleWidth = !mobile && compact ? TABLET_SCALE_WIDTH : PAGE_WIDTH;
       const scale = Math.min(1, viewport / scaleWidth);
@@ -107,10 +125,42 @@ function App() {
       const compareDelta = mobile
         ? Number.parseFloat(document.documentElement.dataset.compareDelta || "0") || 0
         : 0;
-      if (!mobile) delete document.documentElement.dataset.compareDelta;
+      if (!phoneFooter) {
+        delete document.documentElement.dataset.mobileFooterDelta;
+        delete document.documentElement.dataset.mobileFooterTop;
+        delete document.documentElement.dataset.mobileFooterHeight;
+        const desktopFooter = page.querySelector(".apple-04__footer--desktop");
+        if (desktopFooter) {
+          desktopFooter.style.top = "";
+          desktopFooter.style.height = "";
+          desktopFooter.style.visibility = "";
+        }
+        const mobileFooter = page.querySelector(".apple-04__footer--mobile");
+        if (mobileFooter) {
+          mobileFooter.style.top = "";
+          mobileFooter.style.height = "";
+        }
+      }
+      if (!mobile) {
+        delete document.documentElement.dataset.compareDelta;
+        delete document.documentElement.dataset.footnotesDelta;
+      }
       page.style.transform = `scale(${scale})`;
-      page.style.height = `${PAGE_HEIGHT + compareDelta}px`;
-      fit.style.height = `${(PAGE_HEIGHT + compareDelta) * scale}px`;
+      if (phoneFooter) {
+        requestAnimationFrame(() => syncWebsiteMobileFooter());
+        const mobileFooterDelta = Number.parseFloat(document.documentElement.dataset.mobileFooterDelta || "0") || 0;
+        if (mobileFooterDelta) {
+          const pageH = PAGE_HEIGHT + mobileFooterDelta;
+          page.style.height = `${pageH}px`;
+          fit.style.height = `${pageH * scale}px`;
+        } else {
+          page.style.height = `${PAGE_HEIGHT + compareDelta}px`;
+          fit.style.height = `${(PAGE_HEIGHT + compareDelta) * scale}px`;
+        }
+      } else {
+        page.style.height = `${PAGE_HEIGHT + compareDelta}px`;
+        fit.style.height = `${(PAGE_HEIGHT + compareDelta) * scale}px`;
+      }
       fit.style.width = "100%";
       fit.style.maxWidth = "none";
       fit.style.margin = "0";
@@ -255,11 +305,73 @@ function App() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [globalNavOpen]);
 
+  useEffect(() => {
+    let cancelled = false;
+    let finished = false;
+    const started = Date.now();
+    const minMs = 700;
+    const maxMs = 4500;
+
+    const reveal = () => {
+      if (cancelled || finished) return;
+      finished = true;
+      const wait = Math.max(0, minMs - (Date.now() - started));
+      window.setTimeout(() => {
+        if (cancelled) return;
+        setSkeletonLeaving(true);
+        window.setTimeout(() => {
+          if (!cancelled) setBooting(false);
+        }, 350);
+      }, wait);
+    };
+
+    const waitForAssets = () => {
+      const page = pageRef.current;
+      if (!page) {
+        reveal();
+        return;
+      }
+      const images = [...page.querySelectorAll("img")].slice(0, 16);
+      const pending = images.filter((img) => !img.complete);
+      if (pending.length === 0) {
+        reveal();
+        return;
+      }
+      let left = pending.length;
+      const tick = () => {
+        left -= 1;
+        if (left <= 0) reveal();
+      };
+      pending.forEach((img) => {
+        img.addEventListener("load", tick, { once: true });
+        img.addEventListener("error", tick, { once: true });
+      });
+    };
+
+    const start = () => {
+      requestAnimationFrame(() => waitForAssets());
+    };
+
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+
+    const safety = window.setTimeout(reveal, maxMs);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(safety);
+      window.removeEventListener("load", start);
+    };
+  }, []);
+
   return (
     <>
+    {booting ? (
+      <PageSkeleton className={skeletonLeaving ? "is-leaving" : undefined} />
+    ) : null}
     <div
-      className={`apple-04-fit${globalNavOpen ? " is-globalnav-open" : ""}`}
+      className={`apple-04-fit${globalNavOpen ? " is-globalnav-open" : ""}${booting ? " is-page-booting" : ""}`}
       ref={fitRef}
+      aria-hidden={booting ? true : undefined}
     >
     <div className="apple-04" ref={pageRef}>
       <div className="apple-04__globalnav">
@@ -282,9 +394,17 @@ function App() {
       <div className="apple-04__main">
         <MainMain />
       </div>
-      <div className="apple-04__footer">
+      <div className="apple-04__footer apple-04__footer--desktop">
         <FooterAcGlobalfooter />
       </div>
+      {isPhoneFooter ? (
+        <div className="apple-04__footer apple-04__footer--mobile">
+          <WebsiteMobileFooter
+            onOpenLegal={() => setPanel("legal")}
+            onOpenRegion={() => setPanel("region")}
+          />
+        </div>
+      ) : null}
     </div>
     </div>
     {panel === "search" && (
@@ -334,6 +454,11 @@ function App() {
     {panel === "region" && (
       <PageSheet title="United States" onClose={() => setPanel(null)}>
         <p>You’re viewing the United States store.</p>
+      </PageSheet>
+    )}
+    {panel === "legal" && isPhoneFooter && (
+      <PageSheet title="Legal footnotes" onClose={() => setPanel(null)} variant="legal">
+        <LegalFootnotesSheet />
       </PageSheet>
     )}
     </>

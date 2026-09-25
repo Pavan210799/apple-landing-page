@@ -1,0 +1,202 @@
+/* Accordion footer — phone + tablet (≤1024). Desktop keeps the original footer. */
+.apple-04__footer--mobile {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+@media (min-width: 1025px) {
+  .apple-04__footer--mobile {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    top: auto !important;
+  }
+
+  .apple-04__footer--desktop {
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    top: 15688.14px !important;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  html.website-phone-footer .apple-04__footer--desktop {
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    z-index: 0 !important;
+    top: 0 !important;
+  }
+
+  html.website-phone-footer .apple-04__footer--mobile {
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    position: absolute;
+    left: 0;
+    width: 1440px;
+    height: auto !important;
+    overflow: visible !important;
+    z-index: 6;
+    background: rgb(245, 245, 247);
+    box-sizing: border-box;
+  }
+
+  .website-mobile-footer {
+    width: 1440px;
+    box-sizing: border-box;
+    padding: 64px 96px 96px;
+    background: rgb(245, 245, 247);
+    color: rgb(29, 29, 31);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .website-mobile-footer__legal-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto 56px;
+    min-height: 88px;
+    padding: 0 48px;
+    border: 1px solid rgb(210, 210, 215);
+    border-radius: 980px;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 102, 204);
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    cursor: pointer;
+  }
+
+  .website-mobile-footer__legal-btn:hover,
+  .website-mobile-footer__legal-btn:focus-visible {
+    background: rgb(247, 247, 249);
+    outline: none;
+  }
+
+  .website-mobile-footer__directory {
+    border-top: 1px solid rgb(210, 210, 215);
+  }
+
+  .website-mobile-footer__group {
+    border-bottom: 1px solid rgb(210, 210, 215);
+  }
+
+  .website-mobile-footer__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 96px;
+    padding: 28px 8px;
+    border: 0;
+    background: transparent;
+    color: rgb(29, 29, 31);
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .website-mobile-footer__mark {
+    font-size: 44px;
+    line-height: 1;
+    color: rgb(66, 66, 69);
+  }
+
+  .website-mobile-footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 8px 28px;
+  }
+
+  .website-mobile-footer__links a {
+    display: block;
+    padding: 14px 0;
+    color: rgb(66, 66, 69);
+    font-size: 36px;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .website-mobile-footer__links a:hover {
+    color: rgb(0, 102, 204);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .website-mobile-footer__shop,
+  .website-mobile-footer__copy {
+    margin: 40px 8px 0;
+    color: rgb(110, 110, 115);
+    font-size: 32px;
+    line-height: 1.4;
+  }
+
+  .website-mobile-footer__shop a {
+    color: rgb(0, 102, 204);
+    text-decoration: none;
+  }
+
+  .website-mobile-footer__shop a:hover {
+    text-decoration: underline;
+  }
+
+  .website-mobile-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    margin: 28px 8px 0;
+  }
+
+  .website-mobile-footer__meta a {
+    color: rgb(66, 66, 69);
+    font-size: 28px;
+    text-decoration: none;
+  }
+
+  .website-mobile-footer__meta a:hover {
+    color: rgb(0, 102, 204);
+    text-decoration: underline;
+  }
+
+  .website-mobile-footer__region {
+    display: inline-flex;
+    margin: 36px 8px 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: rgb(66, 66, 69);
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .website-mobile-footer__region:hover {
+    color: rgb(0, 102, 204);
+    text-decoration: underline;
+  }
+
+  html.website-phone-footer .main-main-section-185,
+  html.website-phone-footer .main-main-div-309 {
+    overflow: visible !important;
+  }
+
+  html.website-phone-footer .main-main-div-309 {
+    height: auto !important;
+    min-height: 520px;
+  }
+}
